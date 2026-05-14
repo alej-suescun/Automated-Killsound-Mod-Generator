@@ -5,6 +5,7 @@
 package com.alejsuescun.killsoundgenerator;
 
 import java.util.Scanner;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -14,10 +15,16 @@ public class Main {
     static Scanner myKeyboard = new Scanner(System.in);
     
     public static void main(String[] args) {
-        // Por ahora portear el original aqui
         String nombreMod;
         int nKillsounds;
+
         System.out.println("AUTOMATED KILLSOUND MOD GENERATOR");
+        
+        seleccionArchivos();
+
+        
+        /*
+        
         System.out.print("Ingrese el nombre del mod: ");
         nombreMod = myKeyboard.nextLine();
         
@@ -38,5 +45,36 @@ public class Main {
         creadorDeScripts300.generate(true);
         System.out.println("Se crearon los scripts correctamente!");
         
+        */
+        
+        /*
+        
+        abrir explorador de archivos con x carpeta
+        
+        try {
+            new ProcessBuilder("explorer.exe", "/select," + "C:\\").start();
+        } catch (IOException e) {
+            System.out.println("Ocurrio un error!");
+        }
+        */
+    }
+    
+    public static void seleccionArchivos(){
+        System.out.println("Ingrese donde esta la carpeta con los audios ");      
+        // Para mostrar la ventana de seleccion usando la libreria JFileChooser
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); //Solo seleccionar carpetas
+        int action = chooser.showOpenDialog(null);
+        if (action == JFileChooser.APPROVE_OPTION) {
+            String carpetaAudios = chooser.getSelectedFile().getAbsolutePath();
+            AudioManager myAudioManager = new AudioManager(carpetaAudios);
+            
+            System.out.println("Carpeta Seleccionada: "+carpetaAudios);
+            myAudioManager.detectArchivos();
+        } else {
+            System.out.println("Cancelo la seleccion");
+        }
+        
+
     }
 }
