@@ -17,21 +17,28 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.AudioFormat;
 
 /**
- *
+ * Clase que maneja los archivos de audio
  * @author suesc
  */
 public class AudioManager {
     String ubicacionCarpeta;
     static ListaDobleEnlazada listaOg, listaNueva;
     
+    /**
+     * Constructor de la clase
+     * @param ubicacionCarpeta Un string con la ubicacion de la carpeta
+     */
     public AudioManager(String ubicacionCarpeta) {
         this.ubicacionCarpeta = ubicacionCarpeta;
         this.listaOg = new ListaDobleEnlazada();
         this.listaNueva = new ListaDobleEnlazada();
     }
     
-    // añade a listaDobleEnzalada listaOg con los archivos .wav de la carpeta
-    // que esten bien de requisitos
+    /**
+     * Metodo que detecta los archivos usando Files.walk y llama {@link #validWav}
+     * para cada archivo
+     * @see #validWav
+    **/
     public void detectArchivos(){
         Path path = Paths.get(ubicacionCarpeta);
         
@@ -53,8 +60,19 @@ public class AudioManager {
         
     }
     
-    // Verifica el archivo q se le proporciona sea un WAV y q cumpla los requisitos
-    // para TF2 si es asi los añade a la listaOg
+    /**
+     * Metodo que verifica el archivo que le es proporcionado
+     * si es un WAV y cumple con los siguientes requisitos para TF2
+     * (Requisitos sacados de 
+     * <a href="https://developer.valvesoftware.com/wiki/WAV">WAV Valve Depelover Wiki</a>):
+     * <ul>
+     *  <li>Frecuencia de muestreo: 44100 Hz</li>
+     *  <li>Profundidad de bits: 16 bits</li>
+     * </ul>
+     * sera añadido a {@link #listaOg}
+     * 
+     * @param file un archivo en lo ideal de audio y en wav
+    **/
     public static void validWav(File file){
         String path = file.getAbsolutePath();
         try {

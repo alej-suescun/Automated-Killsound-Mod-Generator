@@ -17,7 +17,7 @@ public class Main {
     static String title = "AUTOMATED KILLSOUND MOD GENERATOR";
     
     public static void main(String[] args) {
-        int opcion = -1;
+        int opcion;
         String[] opciones = {"Crear Mod Nuevo", "Salir"};
         
         do {            
@@ -27,6 +27,8 @@ public class Main {
                 crearMod();
             }
         } while (opcion != 1); // Salir
+        
+        JOptionPane.showMessageDialog(null, "Saliendo del programa...", title, JOptionPane.INFORMATION_MESSAGE);
         /*
         System.out.println("AUTOMATED KILLSOUND MOD GENERATOR");
         
@@ -97,6 +99,7 @@ public class Main {
         return opcionElegida;
     }
     
+
     public static void crearMod(){
         String nombreMod = pedirNombre();
         
@@ -107,6 +110,11 @@ public class Main {
         
     }
     
+    
+    /**
+     * Metodo que le pide el nombre al usuario
+     * @return Null si el usuario le da a cancelar
+    **/
     public static String pedirNombre(){
         String nombreMod;
         int sn;
@@ -115,9 +123,9 @@ public class Main {
             nombreMod = JOptionPane.showInputDialog(null, 
                     "Ingrese el nombre que desea", title, JOptionPane.PLAIN_MESSAGE);
             
-            if (nombreMod == null) {
+            if (nombreMod == null) { // Le da a cancelar
                 return null;
-            } else if (nombreMod.equals("") || nombreMod.equals(" ")) {
+            } else if (nombreMod.equals("") || nombreMod.equals(" ")) { // No ingresa nada
                 JOptionPane.showMessageDialog(null,
                         "Ingrese un nombre valido", title, JOptionPane.ERROR_MESSAGE);
             } else {

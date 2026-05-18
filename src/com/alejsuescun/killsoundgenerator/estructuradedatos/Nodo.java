@@ -5,7 +5,8 @@
 package com.alejsuescun.killsoundgenerator.estructuradedatos;
 
 /**
- *
+ * Clase que es un Nodo apunta hacia al siguiente y el anterior
+ * @see ListaDobleEnlazada
  * @author suesc
  */
 public class Nodo {

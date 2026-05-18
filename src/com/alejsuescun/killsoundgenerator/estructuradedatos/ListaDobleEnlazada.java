@@ -5,17 +5,22 @@
 package com.alejsuescun.killsoundgenerator.estructuradedatos;
 
 /**
- *
+ * Clase que es una Lista Doblemente enlazada
+ * 
+ * @see Nodo
  * @author suesc
  */
 public class ListaDobleEnlazada {
     Nodo head, tail;
-
+    
     public ListaDobleEnlazada() {
         this.head = null;
         this.tail = null;
     }
-    
+    /**
+     * Inserta un nuevo nodo al inicio
+     * @param ubicacionArchivo String con la ubicacion de un archivo
+     */
     public void insertarInicio(String ubicacionArchivo){
         Nodo nuevo = new Nodo(ubicacionArchivo);
         
@@ -31,6 +36,10 @@ public class ListaDobleEnlazada {
         head = nuevo;
     }
     
+    /**
+     * Inserta un nuevo nodo al final
+     * @param ubicacionArchivo String con la ubicacion de un archivo
+     */
     public void insertarFinal(String ubicacionArchivo){
         Nodo nuevo = new Nodo(ubicacionArchivo);
         
@@ -46,7 +55,11 @@ public class ListaDobleEnlazada {
         tail = nuevo;
     }
     
-    // Devuelve el tamaño de la lista
+    /**
+     * Retorna el tamaño de la lista
+     * 
+     * @return Un int con el tamaño de la lista
+     */
     public int sizeLista(){
         if (head == null) {return 0;} // Lista vacia
         
@@ -61,7 +74,9 @@ public class ListaDobleEnlazada {
         return i;
     }
     
-    
+    /**
+     * Imprime la lista completa
+     */
     public void printLista(){
         if (head == null) {
             System.out.println("Lista Vacia");
