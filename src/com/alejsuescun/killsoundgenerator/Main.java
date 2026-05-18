@@ -70,26 +70,12 @@ public class Main {
         }
         */
     }
-    
-    public static void seleccionArchivos(){
-        System.out.println("Ingrese donde esta la carpeta con los audios ");      
-        // Para mostrar la ventana de seleccion usando la libreria JFileChooser
-        JFileChooser chooser = new JFileChooser();
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); //Solo seleccionar carpetas
-        int action = chooser.showOpenDialog(null);
-        if (action == JFileChooser.APPROVE_OPTION) {
-            String carpetaAudios = chooser.getSelectedFile().getAbsolutePath();
-            AudioManager myAudioManager = new AudioManager(carpetaAudios);
-            
-            System.out.println("Carpeta Seleccionada: "+carpetaAudios);
-            myAudioManager.detectArchivos();
-        } else {
-            System.out.println("Cancelo la seleccion");
-        }
-        
-
-    }
-    
+   
+    /**
+     * Metodo del menu
+     * @param opciones Array de strings que contenga las opciones
+     * @return int de la opcion seleccionada
+     */
     public static int menu(String[] opciones){
         
         int opcionElegida = JOptionPane.showOptionDialog(
@@ -99,15 +85,41 @@ public class Main {
         return opcionElegida;
     }
     
-
+    /**
+     * Metodo que contiene la logica para crear el mod
+     */
     public static void crearMod(){
         String nombreMod = pedirNombre();
+        
         
         if (nombreMod == null) {
             return;
         }
         
-        
+        do {            
+            String[] opciones = {"Seleccionar Carpeta", "Seleccionar Archivos", "Cancelar"};
+            int opcion = JOptionPane.showOptionDialog(null,
+                    "Seleciona una opcion", title, JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+            
+            switch (opcion) {
+                case 0:
+                    String ruta = seleccionArchivosCarpeta();
+                    
+                    if (ruta == null) {return;} //Usuario Cancela
+                    
+                    carpetManager(ruta);
+                    break;
+                case 2:
+                    return;
+                default:
+                    noImplementadoMessage();
+                    return;
+            }
+            
+
+            
+        } while (true);
     }
     
     
@@ -140,4 +152,59 @@ public class Main {
         
         return nombreMod;
     }
+    
+    /**
+     * Metodo para seleccionar los archivos de la manera de seleccionar una carpeta, 
+     * utiliza JFileChooser
+     * @return Un string con la direccion de la carpeta o null si cancela el usuario
+     * @see JFileChooser
+     */
+    public static String seleccionArchivosCarpeta(){
+        JFileChooser chooser = new JFileChooser();
+        String carpetaAudios;
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); //Solo seleccionar carpetas
+        do {            
+            int action = chooser.showOpenDialog(null);
+            if (action == JFileChooser.APPROVE_OPTION) {
+                /*
+                String carpetaAudios = chooser.getSelectedFile().getAbsolutePath();
+                AudioManager myAudioManager = new AudioManager(carpetaAudios);
+
+                System.out.println("Carpeta Seleccionada: "+carpetaAudios);
+                myAudioManager.detectArchivos();
+                */
+
+                carpetaAudios = chooser.getSelectedFile().getAbsolutePath();
+                int op = JOptionPane.showConfirmDialog(null,
+                        "Selecciono: \""+carpetaAudios+"\"\n ¿Es correcta?",
+                        title, JOptionPane.YES_NO_OPTION);
+                
+                if (op == 0) {
+                    return carpetaAudios;
+                }
+                
+                
+            } else {
+                return null;
+            }  
+        } while (true);
+        
+
+    }
+    
+    /**
+     * Metodo para usar AudioManager pero con una carpeta
+     * @param ruta Un string con la ruta de la carpeta
+     */
+    public static void carpetManager(String ruta){
+        noImplementadoMessage();
+    }
+    
+    /**
+     * Metodo que muestra el mensaje que aun no esta implementado
+     */
+    public static void noImplementadoMessage(){
+        JOptionPane.showMessageDialog(null, "Aun no esta implementado!", title, JOptionPane.WARNING_MESSAGE);
+    }
+    
 }
