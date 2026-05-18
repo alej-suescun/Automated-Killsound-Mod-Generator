@@ -90,9 +90,18 @@ public class Main {
      */
     public static void crearMod(){
         String nombreMod = pedirNombre();
+        String rutaMod;
         
+        if (nombreMod == null) { //cancelar
+            return;
+        }
         
-        if (nombreMod == null) {
+        JOptionPane.showMessageDialog(null, 
+                "Seleccione donde quiere crear el mod", title, JOptionPane.INFORMATION_MESSAGE);
+        
+        rutaMod = pedirRutaMod(nombreMod);
+        
+        if (rutaMod == null) { //cancelar
             return;
         }
         
@@ -114,7 +123,7 @@ public class Main {
 
                         if (cantArchivos == 0) {break;} //Usuario escoje una carpetavacia
 
-                        crearSoundScript(cantArchivos, nombreMod);
+                        crearSoundScript(cantArchivos, nombreMod, rutaMod);
                         break;
                     } while (true);
                     break;
@@ -147,7 +156,7 @@ public class Main {
             
             if (nombreMod.equals("") || nombreMod.equals(" ")) { // No ingresa nada
                 JOptionPane.showMessageDialog(null,
-                        "Ingrese un nombre valido", title, JOptionPane.ERROR_MESSAGE);
+                        "Ingrese un nombre valido", title, JOptionPane.WARNING_MESSAGE);
             } else {
                 sn = JOptionPane.showConfirmDialog(null, 
                         "Ha ingresado: \""+nombreMod+"\"\n ¿Esta seguro?", title, JOptionPane.YES_NO_OPTION);
@@ -160,6 +169,38 @@ public class Main {
         
         return nombreMod;
     }
+    
+    /**
+     * Metodo para pedirle al usuario donde se guardara el mod
+     * @param nombreMod String con el nombre del mod
+     * @return string con la ruta seleccionada por el usuario+\nombreMod
+     */
+    public static String pedirRutaMod(String nombreMod){
+        String ruta;
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); //Solo seleccionar carpeta
+        
+        do {            
+            int action = chooser.showOpenDialog(null);
+            if (action == JFileChooser.APPROVE_OPTION) {
+                
+                ruta = chooser.getSelectedFile().getAbsolutePath();
+                
+                ruta = ruta.concat("\\"+nombreMod);
+                
+                
+                int op = JOptionPane.showConfirmDialog(null,
+                        "Se creara el mod en: \""+ruta+"\"\n ¿Es correcta?",
+                        title, JOptionPane.YES_NO_OPTION);
+                if (op == 0) {
+                    return ruta;
+                }
+            } else {
+                return null;
+            }  
+        } while (true);
+    }
+    
     
     /**
      * Metodo para seleccionar los archivos de la manera de seleccionar una carpeta, 
@@ -221,8 +262,9 @@ public class Main {
      * Metodo que genera el soundScript en ...\NombreMod\Scripts
      * @param cantAudios int con cuantos audios va a tener el script
      * @param nombreMod String con el nombre del mod
+     * @param pathMod String con la ruta del mod
      */
-    public static void crearSoundScript(int cantAudios, String nombreMod){
+    public static void crearSoundScript(int cantAudios, String nombreMod, String pathMod){
         if (cantAudios == 0) {
             JOptionPane.showMessageDialog(null, 
                     "Alerta se proporcionaron 0 audios!", title, JOptionPane.ERROR_MESSAGE);
@@ -230,7 +272,7 @@ public class Main {
         }
         
         System.out.println("Generando archivos...\n");
-        ScriptGenerator creadorDeScripts300 = new ScriptGenerator(cantAudios, nombreMod);
+        ScriptGenerator creadorDeScripts300 = new ScriptGenerator(cantAudios, nombreMod, pathMod);
         
         creadorDeScripts300.generate(false);
         creadorDeScripts300.generate(true);

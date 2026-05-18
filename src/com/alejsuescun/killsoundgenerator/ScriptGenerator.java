@@ -14,25 +14,42 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileSystemView;
 
 /**
- *
+ * Clase que contiene el metodo para crear el soundScript
  * @author suesc
  */
 public class ScriptGenerator {
     public int nkillsounds;
     public String nombreMod;
+    public String pathMod;
     static String title = "AUTOMATED KILLSOUND MOD GENERATOR";
     
-    public ScriptGenerator(int nkillsounds, String nombreMod) {
+    /**
+     * Constructor de la clase ScriptGenerator
+     * @param nkillsounds int con cuantos killsounds son
+     * @param nombreMod String con el nombre del mod
+     * @param pathMod String con la ruta del mod
+     */
+    public ScriptGenerator(int nkillsounds, String nombreMod, String pathMod) {
         this.nkillsounds = nkillsounds;
         this.nombreMod = nombreMod;
+        this.pathMod = pathMod;
     }
     
-    // Metodo para generar el soundscript
-    // Bool para crear la version de mann vs machine (MvM)
+
+    /**
+     * Metodo para generar el soundscript
+     * 
+     * @param isMvM True para crear el archivo de Mann vs Machine
+     */
     public void generate(boolean isMvM){
-        File documentsUser = FileSystemView.getFileSystemView().getDefaultDirectory();
+        File documentsUser;
         String pathScripts = "\\scripts\\";
-        String pathArchivo = documentsUser.getPath().concat("\\"+nombreMod);
+        String pathArchivo = pathMod;
+        if (pathMod == null) { // Utilizara la carpeta de documentos
+            documentsUser = FileSystemView.getFileSystemView().getDefaultDirectory();
+            pathArchivo = documentsUser.getPath().concat("\\"+nombreMod);
+        }
+        
         pathArchivo = pathArchivo.concat(pathScripts);
         
         // crear primero el directorio
