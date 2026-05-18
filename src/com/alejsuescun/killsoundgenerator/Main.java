@@ -4,27 +4,37 @@
  */
 package com.alejsuescun.killsoundgenerator;
 
-import java.util.Scanner;
+//import java.util.Scanner;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author suesc
  */
 public class Main {
-    static Scanner myKeyboard = new Scanner(System.in);
+//    static Scanner myKeyboard = new Scanner(System.in);
+    static String title = "AUTOMATED KILLSOUND MOD GENERATOR";
     
     public static void main(String[] args) {
-        String nombreMod;
-        int nKillsounds;
-
+        int opcion = -1;
+        String[] opciones = {"Crear Mod Nuevo", "Salir"};
+        
+        do {            
+            opcion = menu(opciones);
+            
+            if (opcion == 0) {
+                crearMod();
+            }
+        } while (opcion != 1); // Salir
+        /*
         System.out.println("AUTOMATED KILLSOUND MOD GENERATOR");
         
         seleccionArchivos();
-
-        
+        */
         /*
-        
+        String nombreMod;
+        int nKillsounds;
         System.out.print("Ingrese el nombre del mod: ");
         nombreMod = myKeyboard.nextLine();
         
@@ -76,5 +86,50 @@ public class Main {
         }
         
 
+    }
+    
+    public static int menu(String[] opciones){
+        
+        int opcionElegida = JOptionPane.showOptionDialog(
+                null, "¿Que desea hacer?", title, 
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                opciones, opciones[0]);
+        return opcionElegida;
+    }
+    
+    public static void crearMod(){
+        String nombreMod = pedirNombre();
+        
+        if (nombreMod == null) {
+            return;
+        }
+        
+        
+    }
+    
+    public static String pedirNombre(){
+        String nombreMod;
+        int sn;
+        
+        do {            
+            nombreMod = JOptionPane.showInputDialog(null, 
+                    "Ingrese el nombre que desea", title, JOptionPane.PLAIN_MESSAGE);
+            
+            if (nombreMod == null) {
+                return null;
+            } else if (nombreMod.equals("") || nombreMod.equals(" ")) {
+                JOptionPane.showMessageDialog(null,
+                        "Ingrese un nombre valido", title, JOptionPane.ERROR_MESSAGE);
+            } else {
+                sn = JOptionPane.showConfirmDialog(null, 
+                        "Ha ingresado: \""+nombreMod+"\"\n ¿Esta seguro?", title, JOptionPane.YES_NO_OPTION);
+                
+                if (sn == 0) {
+                    break;
+                }
+            }
+        } while (true);
+        
+        return nombreMod;
     }
 }
