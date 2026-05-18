@@ -104,11 +104,19 @@ public class Main {
             
             switch (opcion) {
                 case 0:
-                    String ruta = seleccionArchivosCarpeta();
-                    
-                    if (ruta == null) {return;} //Usuario Cancela
-                    
-                    carpetManager(ruta);
+                    do {                        
+                        String ruta = seleccionArchivosCarpeta();
+                        int cantArchivos;
+
+                        if (ruta == null) {break;} //Usuario Cancela
+
+                        cantArchivos = carpetManager(ruta);
+
+                        if (cantArchivos == 0) {break;} //Usuario escoje una carpetavacia
+
+                        crearSoundScript(cantArchivos, nombreMod);
+                        break;
+                    } while (true);
                     break;
                 case 2:
                     return;
@@ -135,9 +143,9 @@ public class Main {
             nombreMod = JOptionPane.showInputDialog(null, 
                     "Ingrese el nombre que desea", title, JOptionPane.PLAIN_MESSAGE);
             
-            if (nombreMod == null) { // Le da a cancelar
-                return null;
-            } else if (nombreMod.equals("") || nombreMod.equals(" ")) { // No ingresa nada
+            if (nombreMod == null) { return null;} // Le da a cancelar
+            
+            if (nombreMod.equals("") || nombreMod.equals(" ")) { // No ingresa nada
                 JOptionPane.showMessageDialog(null,
                         "Ingrese un nombre valido", title, JOptionPane.ERROR_MESSAGE);
             } else {
@@ -193,11 +201,42 @@ public class Main {
     }
     
     /**
-     * Metodo para usar AudioManager pero con una carpeta
+     * Metodo para usar AudioManager pero con una carpeta. 
+     * Se usa AudioManager.detectArchivos para agregarlos a la listaOg de audiomanager
      * @param ruta Un string con la ruta de la carpeta
+     * @return Int con cuantos archivos detecto
+     * @see AudioManager
      */
-    public static void carpetManager(String ruta){
-        noImplementadoMessage();
+    public static int carpetManager(String ruta){
+        AudioManager myAudioManager = new AudioManager(ruta);
+        
+        if (myAudioManager.detectArchivos()) {
+            return myAudioManager.getCuantosArchivos();
+        } else {
+            return 0;
+        }
+    }
+    
+    /**
+     * Metodo que genera el soundScript en ...\NombreMod\Scripts
+     * @param cantAudios int con cuantos audios va a tener el script
+     * @param nombreMod String con el nombre del mod
+     */
+    public static void crearSoundScript(int cantAudios, String nombreMod){
+        if (cantAudios == 0) {
+            JOptionPane.showMessageDialog(null, 
+                    "Alerta se proporcionaron 0 audios!", title, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        System.out.println("Generando archivos...\n");
+        ScriptGenerator creadorDeScripts300 = new ScriptGenerator(cantAudios, nombreMod);
+        
+        creadorDeScripts300.generate(false);
+        creadorDeScripts300.generate(true);
+        System.out.println("Se crearon los scripts correctamente!");
+        
+        
     }
     
     /**

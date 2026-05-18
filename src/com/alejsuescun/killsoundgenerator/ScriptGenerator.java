@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileSystemView;
 
 /**
@@ -19,7 +20,8 @@ import javax.swing.filechooser.FileSystemView;
 public class ScriptGenerator {
     public int nkillsounds;
     public String nombreMod;
-
+    static String title = "AUTOMATED KILLSOUND MOD GENERATOR";
+    
     public ScriptGenerator(int nkillsounds, String nombreMod) {
         this.nkillsounds = nkillsounds;
         this.nombreMod = nombreMod;
@@ -49,11 +51,14 @@ public class ScriptGenerator {
         
         try {
             File archivo = new File(pathArchivo);
-            if (archivo.createNewFile()) {
+            archivo.createNewFile();
+            /*
+            if () {
                 System.out.println("Archivo creado correctamente en: "+pathArchivo);
             } else {
                 System.out.println("El archivo ya existe!");
             }
+            */
             
             // Ahora escribir los datos
             FileWriter escritor = new FileWriter(archivo);
@@ -82,7 +87,10 @@ public class ScriptGenerator {
             escritor.write("\n}");
             
             escritor.close();
-            System.out.println("Se escribio correctamente los datos");
+            //System.out.println("Se escribio correctamente los datos");
+            
+            JOptionPane.showMessageDialog(null,
+                    "Se creo correctamente el archivo: "+pathArchivo, title, JOptionPane.INFORMATION_MESSAGE);
             
         } catch (IOException e) {
             System.out.println("Sucedio un error!");

@@ -15,6 +15,7 @@ import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.AudioFormat;
+import javax.swing.JOptionPane;
 
 /**
  * Clase que maneja los archivos de audio
@@ -22,6 +23,7 @@ import javax.sound.sampled.AudioFormat;
  */
 public class AudioManager {
     String ubicacionCarpeta;
+    static String title = "AUTOMATED KILLSOUND MOD GENERATOR";
     static ListaDobleEnlazada listaOg, listaNueva;
     
     /**
@@ -37,9 +39,10 @@ public class AudioManager {
     /**
      * Metodo que detecta los archivos usando Files.walk y llama {@link #validWav}
      * para cada archivo
+     * @return True si detecta almenos 1 archivo, false si no detecta nada
      * @see #validWav
     **/
-    public void detectArchivos(){
+    public boolean detectArchivos(){
         Path path = Paths.get(ubicacionCarpeta);
         
         
@@ -51,13 +54,24 @@ public class AudioManager {
                 validWav(file);
             });
             
-            System.out.println("Se detectaron "+listaOg.sizeLista()
-                    +" archivos que estan bien");
+            if (listaOg.sizeLista() == 0) {
+                JOptionPane.showMessageDialog(null,
+                        "No ee agrego ningun archivo! \n Prueba cambiar la carpeta", title,
+                        JOptionPane.WARNING_MESSAGE);
+                return false;
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Se agregaron: "+listaOg.sizeLista()+" archivos", title,
+                        JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+            
+
             //listaOg.printLista();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+        return false;
     }
     
     /**
@@ -107,6 +121,15 @@ public class AudioManager {
     
     public void renombrarArchivos(){
         
+    }
+    
+    /**
+     * Devuelve cuantos archivos tiene en listaOg
+     * @return int con cuantos archivos tiene detectados
+     * @see #listaOg
+     */
+    public int getCuantosArchivos(){
+        return listaOg.sizeLista();
     }
     
 }
