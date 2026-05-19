@@ -7,9 +7,11 @@ package com.alejsuescun.killsoundgenerator;
 import com.alejsuescun.killsoundgenerator.estructuradedatos.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioSystem;
@@ -119,8 +121,103 @@ public class AudioManager {
         }
     }
     
-    public void renombrarArchivos(){
+    /**
+     * Metodo que copia y pega todos los archivos registrados en listaOg
+     * @param pathMod Ruta de donde el usuario decidio crear el mod
+     */
+    public void copyPasteArchivos(String pathMod){
+        int sizeLista = listaOg.sizeLista();
         
+        if (sizeLista == 0) {
+            return;
+        }
+        
+        // Lugar donde tienen que estar los audios
+        // MiMod/sound/ui
+        // mirar: https://wiki.teamfortress.com/wiki/Hit_Sound
+        
+        String pathSounds = pathMod.concat("\\sound\\ui");
+        
+        // Crear directorio
+        try {
+            Path path = Paths.get(pathSounds);
+            Files.createDirectories(path);
+            System.out.println("Se creo la carpeta de mods en: "+path);
+        } catch (IOException e) {
+            System.out.println("No se pudo crear la carpeta de mods en: "+pathSounds);
+            e.printStackTrace();
+        }
+        
+        //Copiar y pegar archivos
+        try {
+            for (int i = 0; i < sizeLista; i++) {
+                Path sourceFile = Paths.get(listaOg.getXnodoDato(i));
+                String fileName = sourceFile.getFileName().toString();
+                Path targetFile = Paths.get(pathSounds+"\\"+fileName);
+                
+                Files.copy(sourceFile, targetFile, StandardCopyOption.REPLACE_EXISTING);
+                listaNueva.insertarFinal(targetFile.toString());
+                System.out.println("Se copio correctamente el archivo: "+targetFile.toString());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    public void renombrarArchivos(){
+        ListaDobleEnlazada temp = listaNueva;
+        Path source = Paths.get(temp.getXnodoDato(0));
+        String sourceDirectory = source.getParent().toString();
+        String nombreNuevo = sourceDirectory.concat("\\killsound.wav");
+        int contKillsound = 0, sizeLista = temp.sizeLista();
+        boolean sn = false;
+        
+        if (temp.eliminarXNodo(nombreNuevo)) {
+            sizeLista--;
+            contKillsound++;
+        }
+        
+        for (int i = 1; i < sizeLista; i++) {
+//            source = Paths.get(listaNueva.getXnodoDato(i));
+            nombreNuevo = sourceDirectory.concat("\\killsound"+(i+1)+".wav");
+            if (temp.eliminarXNodo(nombreNuevo)) {
+                sizeLista--;
+                contKillsound++;
+            }
+        }
+        
+        if (contKillsound == 0) {
+            // renombrar archivos 
+            try {
+                nombreNuevo = sourceDirectory.concat("\\killsound.wav");
+                Files.move(source, source.resolveSibling(nombreNuevo)); //Primer killsound
+            } catch (FileAlreadyExistsException e){
+                System.out.println("El archivo ya existe!");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+            sn = true;
+            contKillsound++;
+        }
+        
+        contKillsound++;
+        // se esta saltando el for
+        for (int i = (sn ? 1 : 0); i < sizeLista; i++) {
+            source = Paths.get(temp.getXnodoDato(i));
+            nombreNuevo = sourceDirectory.concat("\\killsound"+contKillsound+".wav");
+            try {
+                Files.move(source, source.resolveSibling(nombreNuevo));
+                System.out.println("Se renombro correctamente: "+source.toString());
+            } catch (FileAlreadyExistsException e) {
+                System.out.println("El archivo ya existe!");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            contKillsound++;
+        }
     }
     
     /**
@@ -129,7 +226,7 @@ public class AudioManager {
      * @see #listaOg
      */
     public int getCuantosArchivos(){
-        return listaOg.sizeLista();
+        return listaNueva.sizeLista();
     }
     
 }

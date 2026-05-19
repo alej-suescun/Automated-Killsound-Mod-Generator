@@ -91,6 +91,7 @@ public class Main {
     public static void crearMod(){
         String nombreMod = pedirNombre();
         String rutaMod;
+        Boolean sn = false;
         
         if (nombreMod == null) { //cancelar
             return;
@@ -105,8 +106,10 @@ public class Main {
             return;
         }
         
-        do {            
-            String[] opciones = {"Seleccionar Carpeta", "Seleccionar Archivos", "Cancelar"};
+        do {     
+
+            String[] opciones = {"Seleccionar Carpeta que contenga los audios",
+                "Seleccionar Archivos", "Cancelar"};
             int opcion = JOptionPane.showOptionDialog(null,
                     "Seleciona una opcion", title, JOptionPane.DEFAULT_OPTION,
                     JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
@@ -116,14 +119,15 @@ public class Main {
                     do {                        
                         String ruta = seleccionArchivosCarpeta();
                         int cantArchivos;
-
+                        
                         if (ruta == null) {break;} //Usuario Cancela
 
-                        cantArchivos = carpetManager(ruta);
-
+                        cantArchivos = carpetManager(ruta, rutaMod);
+                        
                         if (cantArchivos == 0) {break;} //Usuario escoje una carpetavacia
-
+                        
                         crearSoundScript(cantArchivos, nombreMod, rutaMod);
+                        sn = true;
                         break;
                     } while (true);
                     break;
@@ -134,8 +138,10 @@ public class Main {
                     return;
             }
             
-
-            
+            if (sn) {
+                JOptionPane.showMessageDialog(null, "Se creo correctamente el mod!", title, JOptionPane.INFORMATION_MESSAGE);
+                break;
+            }
         } while (true);
     }
     
@@ -248,10 +254,23 @@ public class Main {
      * @return Int con cuantos archivos detecto
      * @see AudioManager
      */
-    public static int carpetManager(String ruta){
+    public static int carpetManager(String ruta, String rutaMod){
         AudioManager myAudioManager = new AudioManager(ruta);
         
         if (myAudioManager.detectArchivos()) {
+            
+            JOptionPane.showMessageDialog(null, "Copiando archivos...", title, JOptionPane.PLAIN_MESSAGE);
+            
+            myAudioManager.copyPasteArchivos(rutaMod);
+            
+            JOptionPane.showMessageDialog(null, "Se copiaron los archivos correctamente!", title, JOptionPane.INFORMATION_MESSAGE);
+            
+            JOptionPane.showMessageDialog(null, "Renombrando archivos...", title, JOptionPane.INFORMATION_MESSAGE);
+            
+            myAudioManager.renombrarArchivos();
+            
+            JOptionPane.showMessageDialog(null, "Se renombraron los archivos correctamente!", title, JOptionPane.INFORMATION_MESSAGE);
+            
             return myAudioManager.getCuantosArchivos();
         } else {
             return 0;
