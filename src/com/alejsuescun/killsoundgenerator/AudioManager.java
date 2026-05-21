@@ -24,19 +24,30 @@ import javax.swing.JOptionPane;
  * @author suesc
  */
 public class AudioManager {
+    String[] arrayArchivos;
     String ubicacionCarpeta;
     static String title = "AUTOMATED KILLSOUND MOD GENERATOR";
     static ListaDobleEnlazada listaOg, listaNueva;
     
     /**
-     * Constructor de la clase
+     * Constructor de la clase cuando se usan carpetas
      * @param ubicacionCarpeta Un string con la ubicacion de la carpeta
      */
     public AudioManager(String ubicacionCarpeta) {
         this.ubicacionCarpeta = ubicacionCarpeta;
+        this.arrayArchivos = null;
         this.listaOg = new ListaDobleEnlazada();
         this.listaNueva = new ListaDobleEnlazada();
     }
+    
+    
+    public AudioManager(String[] arrayArchivos){
+        this.arrayArchivos = arrayArchivos;
+        this.ubicacionCarpeta = null;
+        this.listaOg = new ListaDobleEnlazada();
+        this.listaNueva = new ListaDobleEnlazada();
+    }
+    
     
     /**
      * Metodo que detecta los archivos usando Files.walk y llama {@link #validWav}
@@ -45,6 +56,33 @@ public class AudioManager {
      * @see #validWav
     **/
     public boolean detectArchivos(){
+        if (ubicacionCarpeta == null && arrayArchivos == null) {
+            return false;
+        } else if (arrayArchivos != null){ // si son archivos
+            int arraySize = arrayArchivos.length;
+            Path[] paths = new Path[arraySize];
+            
+            for (int i = 0; i < arraySize; i++) {
+                paths[i] = Paths.get(arrayArchivos[i]);
+            }
+            
+            for (int i = 0; i < arraySize; i++) {
+                validWav(paths[i].toFile());
+            }
+            
+            if (listaOg.sizeLista() == 0) {
+                JOptionPane.showMessageDialog(null,
+                        "No se agrego ningun archivo! \n Prueba seleccionar otros archivos", title,
+                        JOptionPane.WARNING_MESSAGE);
+                return false;
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Se agregaron: "+listaOg.sizeLista()+" archivos", title,
+                        JOptionPane.INFORMATION_MESSAGE);
+                return true;
+            }
+        }
+        
         Path path = Paths.get(ubicacionCarpeta);
         
         
@@ -58,7 +96,7 @@ public class AudioManager {
             
             if (listaOg.sizeLista() == 0) {
                 JOptionPane.showMessageDialog(null,
-                        "No ee agrego ningun archivo! \n Prueba cambiar la carpeta", title,
+                        "No se agrego ningun archivo! \n Prueba cambiar la carpeta", title,
                         JOptionPane.WARNING_MESSAGE);
                 return false;
             } else {

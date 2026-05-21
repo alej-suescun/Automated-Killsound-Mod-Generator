@@ -5,6 +5,7 @@
 package com.alejsuescun.killsoundgenerator;
 
 //import java.util.Scanner;
+import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -131,6 +132,22 @@ public class Main {
                         break;
                     } while (true);
                     break;
+                case 1:
+                    do {                        
+                        String[] arrayRutas = seleccionVariosArchivos();
+                        int cantArchivos;
+
+                        if (arrayRutas == null) {break;}
+                        
+                        cantArchivos = archivosManager(arrayRutas, rutaMod);
+                        
+                        if (cantArchivos == 0) {break;}
+                        
+                        crearSoundScript(cantArchivos, nombreMod, rutaMod);
+                        sn = true;
+                        break;
+                    } while (true);
+                    break;
                 case 2:
                     return;
                 default:
@@ -251,6 +268,7 @@ public class Main {
      * Metodo para usar AudioManager pero con una carpeta. 
      * Se usa AudioManager.detectArchivos para agregarlos a la listaOg de audiomanager
      * @param ruta Un string con la ruta de la carpeta
+     * @param rutaMod Un string con la ruta del mod
      * @return Int con cuantos archivos detecto
      * @see AudioManager
      */
@@ -258,20 +276,7 @@ public class Main {
         AudioManager myAudioManager = new AudioManager(ruta);
         
         if (myAudioManager.detectArchivos()) {
-            
-            JOptionPane.showMessageDialog(null, "Copiando archivos...", title, JOptionPane.PLAIN_MESSAGE);
-            
-            myAudioManager.copyPasteArchivos(rutaMod);
-            
-            JOptionPane.showMessageDialog(null, "Se copiaron los archivos correctamente!", title, JOptionPane.INFORMATION_MESSAGE);
-            
-            JOptionPane.showMessageDialog(null, "Renombrando archivos...", title, JOptionPane.INFORMATION_MESSAGE);
-            
-            myAudioManager.renombrarArchivos();
-            
-            JOptionPane.showMessageDialog(null, "Se renombraron los archivos correctamente!", title, JOptionPane.INFORMATION_MESSAGE);
-            
-            return myAudioManager.getCuantosArchivos();
+            return cuantosArchivos(myAudioManager, rutaMod);
         } else {
             return 0;
         }
@@ -298,6 +303,84 @@ public class Main {
         System.out.println("Se crearon los scripts correctamente!");
         
         
+    }
+    
+    /**
+     * Metodo para pedirle al usuario que seleccione varios archivos
+     * @return Un array de strings con la ruta de los archivos
+     */
+    public static String[] seleccionVariosArchivos(){
+        JFileChooser chooser = new JFileChooser();
+        String[] arrayDeArchivosAudios;
+        chooser.setMultiSelectionEnabled(true); //Solo seleccionar carpetas
+        do {            
+            int action = chooser.showOpenDialog(null);
+            if (action == JFileChooser.APPROVE_OPTION) {
+                /*
+                String carpetaAudios = chooser.getSelectedFile().getAbsolutePath();
+                AudioManager myAudioManager = new AudioManager(carpetaAudios);
+
+                System.out.println("Carpeta Seleccionada: "+carpetaAudios);
+                myAudioManager.detectArchivos();
+                */
+                File[] archivos = chooser.getSelectedFiles();
+                
+                int op = JOptionPane.showConfirmDialog(null,
+                        "Selecciono "+archivos.length+" archivos\n ¿Es correcto?",
+                        title, JOptionPane.YES_NO_OPTION);
+                
+                if (op == 0) {
+                    int size = archivos.length;
+                    arrayDeArchivosAudios = new String[size];
+                    for (int i = 0; i < size; i++) {
+                        File file = archivos[i];
+                        arrayDeArchivosAudios[i] = file.getAbsolutePath();
+                    }
+                    return arrayDeArchivosAudios;
+                }    
+            } else { // Cancela
+                return null;
+            }  
+        } while (true);
+    }
+    
+    /**
+     * Metodo que maneja todo dependiendo con archivos
+     * 
+     * @param arrayArchivos un array con las rutas de los archivos
+     * @param rutaMod un string con la ruta del mod
+     * @return entero con cuantos archivos
+     */
+    public static int archivosManager(String[] arrayArchivos, String rutaMod){
+        AudioManager myAudioManager = new AudioManager(arrayArchivos);
+        
+        if (myAudioManager.detectArchivos()) {
+            return cuantosArchivos(myAudioManager, rutaMod);  
+        } else {
+            return 0;
+        }
+    }
+    
+    /**
+     * Metodo que consigue cuantos archivos se copiaron y renombraron
+     * @param myAudioManager un audio manager
+     * @param rutaMod un string con la ruta del mod
+     * @return entero con cuantos archivos
+     */
+    public static int cuantosArchivos(AudioManager myAudioManager, String rutaMod){
+            JOptionPane.showMessageDialog(null, "Copiando archivos...", title, JOptionPane.PLAIN_MESSAGE);
+            
+            myAudioManager.copyPasteArchivos(rutaMod);
+            
+            JOptionPane.showMessageDialog(null, "Se copiaron los archivos correctamente!", title, JOptionPane.INFORMATION_MESSAGE);
+            
+            JOptionPane.showMessageDialog(null, "Renombrando archivos...", title, JOptionPane.INFORMATION_MESSAGE);
+            
+            myAudioManager.renombrarArchivos();
+            
+            JOptionPane.showMessageDialog(null, "Se renombraron los archivos correctamente!", title, JOptionPane.INFORMATION_MESSAGE);
+            
+            return myAudioManager.getCuantosArchivos();
     }
     
     /**
