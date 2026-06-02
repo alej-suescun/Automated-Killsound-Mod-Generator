@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
 public class AudioManager {
     String[] arrayArchivos;
     String ubicacionCarpeta;
-    static String title = "AUTOMATED KILLSOUND MOD GENERATOR";
+    static final String TITTLE = "AUTOMATED KILLSOUND MOD GENERATOR";
     static ListaDobleEnlazada listaOg, listaNueva;
     
     /**
@@ -72,12 +72,12 @@ public class AudioManager {
             
             if (listaOg.sizeLista() == 0) {
                 JOptionPane.showMessageDialog(null,
-                        "No se agrego ningun archivo! \n Prueba seleccionar otros archivos", title,
+                        "No se agrego ningun archivo! \n Prueba seleccionar otros archivos", TITTLE,
                         JOptionPane.WARNING_MESSAGE);
                 return false;
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "Se agregaron: "+listaOg.sizeLista()+" archivos", title,
+                        "Se agregaron: "+listaOg.sizeLista()+" archivos", TITTLE,
                         JOptionPane.INFORMATION_MESSAGE);
                 return true;
             }
@@ -96,12 +96,12 @@ public class AudioManager {
             
             if (listaOg.sizeLista() == 0) {
                 JOptionPane.showMessageDialog(null,
-                        "No se agrego ningun archivo! \n Prueba cambiar la carpeta", title,
+                        "No se agrego ningun archivo! \n Prueba cambiar la carpeta", TITTLE,
                         JOptionPane.WARNING_MESSAGE);
                 return false;
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "Se agregaron: "+listaOg.sizeLista()+" archivos", title,
+                        "Se agregaron: "+listaOg.sizeLista()+" archivos", TITTLE,
                         JOptionPane.INFORMATION_MESSAGE);
                 return true;
             }
@@ -147,7 +147,7 @@ public class AudioManager {
                     System.out.println("Profundidad de bits "+bithDepth+" (Correcta: 16)");
                     System.out.println("Por favor cambie las propiedades del archivo");
                 }
-                
+ 
             } else {
                 System.out.println("El archivo: "+path+" no es un wav!");
             }
