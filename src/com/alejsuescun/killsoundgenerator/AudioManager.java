@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
 public class AudioManager {
     String[] arrayArchivos;
     String ubicacionCarpeta;
-    static final String TITTLE = "AUTOMATED KILLSOUND MOD GENERATOR";
+    static final String TITLE = "AUTOMATED KILLSOUND MOD GENERATOR";
     static ListaDobleEnlazada listaOg, listaNueva;
     
     /**
@@ -72,12 +72,12 @@ public class AudioManager {
             
             if (listaOg.sizeLista() == 0) {
                 JOptionPane.showMessageDialog(null,
-                        "No se agrego ningun archivo! \n Prueba seleccionar otros archivos", TITTLE,
+                        "No se agrego ningun archivo! \n Prueba seleccionar otros archivos", TITLE,
                         JOptionPane.WARNING_MESSAGE);
                 return false;
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "Se agregaron: "+listaOg.sizeLista()+" archivos", TITTLE,
+                        "Se agregaron: "+listaOg.sizeLista()+" archivos", TITLE,
                         JOptionPane.INFORMATION_MESSAGE);
                 return true;
             }
@@ -96,12 +96,12 @@ public class AudioManager {
             
             if (listaOg.sizeLista() == 0) {
                 JOptionPane.showMessageDialog(null,
-                        "No se agrego ningun archivo! \n Prueba cambiar la carpeta", TITTLE,
+                        "No se agrego ningun archivo! \n Prueba cambiar la carpeta", TITLE,
                         JOptionPane.WARNING_MESSAGE);
                 return false;
             } else {
                 JOptionPane.showMessageDialog(null,
-                        "Se agregaron: "+listaOg.sizeLista()+" archivos", TITTLE,
+                        "Se agregaron: "+listaOg.sizeLista()+" archivos", TITLE,
                         JOptionPane.INFORMATION_MESSAGE);
                 return true;
             }

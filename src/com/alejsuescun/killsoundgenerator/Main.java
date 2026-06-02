@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author suesc
  */
 public class Main {
-    static String TITTLE = "AUTOMATED KILLSOUND MOD GENERATOR";
+    static String TITLE = "AUTOMATED KILLSOUND MOD GENERATOR";
     
     public static void main(String[] args) {
         int opcion;
@@ -28,7 +28,7 @@ public class Main {
             }
         } while (opcion != 1); // Salir
         
-        JOptionPane.showMessageDialog(null, "Saliendo del programa...", TITTLE, JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Saliendo del programa...", TITLE, JOptionPane.INFORMATION_MESSAGE);
     }
    
     /**
@@ -38,7 +38,7 @@ public class Main {
      */
     public static int menu(String[] opciones){
         
-        int opcionElegida = JOptionPane.showOptionDialog(null, "¿Que desea hacer?", TITTLE, 
+        int opcionElegida = JOptionPane.showOptionDialog(null, "¿Que desea hacer?", TITLE, 
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                 opciones, opciones[0]);
         return opcionElegida;
@@ -57,7 +57,7 @@ public class Main {
         }
         
         JOptionPane.showMessageDialog(null, 
-                "Seleccione donde quiere crear el mod", TITTLE, JOptionPane.INFORMATION_MESSAGE);
+                "Seleccione donde quiere crear el mod", TITLE, JOptionPane.INFORMATION_MESSAGE);
         
         rutaMod = pedirRutaMod(nombreMod);
         
@@ -70,7 +70,7 @@ public class Main {
             String[] opciones = {"Seleccionar Carpeta que contenga los audios",
                 "Seleccionar Archivos", "Cancelar"};
             int opcion = JOptionPane.showOptionDialog(null,
-                    "Seleciona una opcion", TITTLE, JOptionPane.DEFAULT_OPTION,
+                    "Seleciona una opcion", TITLE, JOptionPane.DEFAULT_OPTION,
                     JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
             
             switch (opcion) {
@@ -114,7 +114,7 @@ public class Main {
             }
             
             if (sn) {
-                JOptionPane.showMessageDialog(null, "Se creo correctamente el mod!", TITTLE, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Se creo correctamente el mod!", TITLE, JOptionPane.INFORMATION_MESSAGE);
                 break;
             }
         } while (true);
@@ -131,16 +131,16 @@ public class Main {
         
         do {            
             nombreMod = JOptionPane.showInputDialog(null, 
-                    "Ingrese el nombre que desea", TITTLE, JOptionPane.PLAIN_MESSAGE);
+                    "Ingrese el nombre que desea", TITLE, JOptionPane.PLAIN_MESSAGE);
             
             if (nombreMod == null) { return null;} // Le da a cancelar
             
             if (nombreMod.equals("") || nombreMod.equals(" ")) { // No ingresa nada
                 JOptionPane.showMessageDialog(null,
-                        "Ingrese un nombre valido", TITTLE, JOptionPane.WARNING_MESSAGE);
+                        "Ingrese un nombre valido", TITLE, JOptionPane.WARNING_MESSAGE);
             } else {
                 sn = JOptionPane.showConfirmDialog(null, 
-                        "Ha ingresado: \""+nombreMod+"\"\n ¿Esta seguro?", TITTLE, JOptionPane.YES_NO_OPTION);
+                        "Ha ingresado: \""+nombreMod+"\"\n ¿Esta seguro?", TITLE, JOptionPane.YES_NO_OPTION);
                 
                 if (sn == 0) {
                     break;
@@ -172,7 +172,7 @@ public class Main {
                 
                 int op = JOptionPane.showConfirmDialog(null,
                         "Se creara el mod en: \""+ruta+"\"\n ¿Es correcta?",
-                        TITTLE, JOptionPane.YES_NO_OPTION);
+                        TITLE, JOptionPane.YES_NO_OPTION);
                 if (op == 0) {
                     return ruta;
                 }
@@ -207,7 +207,7 @@ public class Main {
                 carpetaAudios = chooser.getSelectedFile().getAbsolutePath();
                 int op = JOptionPane.showConfirmDialog(null,
                         "Selecciono: \""+carpetaAudios+"\"\n ¿Es correcta?",
-                        TITTLE, JOptionPane.YES_NO_OPTION);
+                        TITLE, JOptionPane.YES_NO_OPTION);
                 
                 if (op == 0) {
                     return carpetaAudios;
@@ -249,7 +249,7 @@ public class Main {
     public static void crearSoundScript(int cantAudios, String nombreMod, String pathMod){
         if (cantAudios == 0) {
             JOptionPane.showMessageDialog(null, 
-                    "Alerta se proporcionaron 0 audios!", TITTLE, JOptionPane.ERROR_MESSAGE);
+                    "Alerta se proporcionaron 0 audios!", TITLE, JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -285,7 +285,7 @@ public class Main {
                 
                 int op = JOptionPane.showConfirmDialog(null,
                         "Selecciono "+archivos.length+" archivos\n ¿Es correcto?",
-                        TITTLE, JOptionPane.YES_NO_OPTION);
+                        TITLE, JOptionPane.YES_NO_OPTION);
                 
                 if (op == 0) {
                     int size = archivos.length;
@@ -326,17 +326,17 @@ public class Main {
      * @return entero con cuantos archivos
      */
     public static int cuantosArchivos(AudioManager myAudioManager, String rutaMod){
-            JOptionPane.showMessageDialog(null, "Copiando archivos...", TITTLE, JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Copiando archivos...", TITLE, JOptionPane.PLAIN_MESSAGE);
             
             myAudioManager.copyPasteArchivos(rutaMod);
             
-            JOptionPane.showMessageDialog(null, "Se copiaron los archivos correctamente!", TITTLE, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se copiaron los archivos correctamente!", TITLE, JOptionPane.INFORMATION_MESSAGE);
             
-            JOptionPane.showMessageDialog(null, "Renombrando archivos...", TITTLE, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Renombrando archivos...", TITLE, JOptionPane.INFORMATION_MESSAGE);
             
             myAudioManager.renombrarArchivos();
             
-            JOptionPane.showMessageDialog(null, "Se renombraron los archivos correctamente!", TITTLE, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Se renombraron los archivos correctamente!", TITLE, JOptionPane.INFORMATION_MESSAGE);
             
             return myAudioManager.getCuantosArchivos();
     }
@@ -345,7 +345,7 @@ public class Main {
      * Metodo que muestra el mensaje que aun no esta implementado
      */
     public static void noImplementadoMessage(){
-        JOptionPane.showMessageDialog(null, "Aun no esta implementado!", TITTLE, JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Aun no esta implementado!", TITLE, JOptionPane.WARNING_MESSAGE);
     }
     
 }
