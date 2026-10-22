@@ -1,0 +1,112 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.alejsuescun.killsoundgenerator.vista;
+
+import javax.swing.*;
+
+/**
+ * Clase para controlar y crear la ventana principal del programa
+ * @author suesc
+ */
+public class VentanaPrincipal extends JFrame{
+    protected final static String TITULO_VENTANA = "AUTOMATED KILLSOUND MOD GENERATOR";
+    private JTextField txtNombreMod;
+    private JTextField txtPathMod;
+    
+    /**
+     * Crear la ventana principal del programa
+     */
+    public VentanaPrincipal() {
+        super(TITULO_VENTANA);
+        setSize(854, 480);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        setLocationRelativeTo(null); //Centrar la ventana en la pantalla
+        
+        
+        
+        add(crearPanelArriba());
+        add(crearPanelAbajo());
+        
+        setVisible(true);
+    }
+    
+    /**
+     * Metodo para mostrar o ocultar la ventana
+     * @param sn
+     */
+    public void ventanaSetVisible(boolean sn){
+        setVisible(sn);
+    }
+    
+    /**
+     * Metodo para obtener el texto que haya ingresado el usuario
+     * en el campo de texto del nombre del mod
+     * @return String con el nombre del mod
+     */
+    public String getTxtNombreMod(){
+        return txtNombreMod.getText();
+    }
+    
+    
+    private JPanel crearPanelArriba(){
+        JPanel panelArriba = new JPanel();
+        panelArriba.setLayout(new BoxLayout(panelArriba, BoxLayout.X_AXIS));
+        
+        panelArriba.add(crearPanelPropiedades());
+        panelArriba.add(crearPanelBotones());
+        
+        return panelArriba;
+    }
+    
+    private JPanel crearPanelAbajo(){
+        JPanel panelAbajo = new JPanel();
+        panelAbajo.setLayout(new BoxLayout(panelAbajo, BoxLayout.Y_AXIS));
+        
+        panelAbajo.add(new JLabel("Ultimos Cambios: "));
+        panelAbajo.add(new JTextArea(
+                """
+                Mostrar los system.out aqui
+                
+                """));
+        
+        return panelAbajo;
+    }
+    
+    private JPanel crearPanelPropiedades(){
+        JPanel panelPropiedades = new JPanel();
+        JPanel panelNKillsounds = new JPanel();
+        txtNombreMod = new JTextField();
+        txtPathMod = new JTextField(); // Cambiarlo por un boton
+
+        
+        panelPropiedades.setLayout(new BoxLayout(panelPropiedades, BoxLayout.Y_AXIS)); //Acomodar verticalmente las cosas
+        panelPropiedades.add(new JLabel("Nombre del mod: "));
+        panelPropiedades.add(txtNombreMod);
+        panelPropiedades.add(new JLabel("Ubicacion del mod: "));
+        panelPropiedades.add(txtPathMod);
+        
+        // Poner al lado uno del otro lo de numero de killsounds
+        panelNKillsounds.setLayout(new BoxLayout(panelNKillsounds, BoxLayout.X_AXIS));
+        panelNKillsounds.add(new JLabel("Numero de killsounds: "));
+        panelNKillsounds.add(new JLabel("0"));
+        
+        panelPropiedades.add(panelNKillsounds);
+        
+        return panelPropiedades;
+    }
+    
+    private JPanel crearPanelBotones(){
+        JPanel panelBotones = new JPanel();
+        panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
+        
+        panelBotones.add(new JButton("Crear Mod"));
+        panelBotones.add(new JButton("Gestionar Archivos"));
+        panelBotones.add(new JButton("Cambiar Propiedades"));
+        
+        return panelBotones;
+    }
+    
+}
