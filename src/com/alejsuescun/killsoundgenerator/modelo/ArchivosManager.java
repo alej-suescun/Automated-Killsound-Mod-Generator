@@ -8,7 +8,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Clase
@@ -27,6 +29,10 @@ public class ArchivosManager {
         Path pathFinal;
         if (path.isBlank()) {
             throw new IllegalArgumentException("La ruta proporcionada no puede estar vacia!");
+        }
+        
+        if (!isGoodStringForFile(path)) {
+            throw new IllegalArgumentException("El titulo no puede estar vacio o no cumple los requisitos!");
         }
         
         pathFinal = Path.of(path, (title.concat(EXTENSION)));
@@ -52,8 +58,9 @@ public class ArchivosManager {
         throw new UnsupportedOperationException("Aun no programada! :3");
     }
     
-    public static void verificarCarpetas(){
-        throw new UnsupportedOperationException("Aun no programada! :3");
+    public static boolean verificarCarpetas(String path){
+        Path pathCarpeta = Paths.get(path);
+        return Files.exists(pathCarpeta) && Files.isDirectory(pathCarpeta);
     }
     
     /**

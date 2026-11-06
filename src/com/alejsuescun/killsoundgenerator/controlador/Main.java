@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author suesc
+ * @author alejSuescun
  */
 public class Main {
     static String TITLE = "AUTOMATED KILLSOUND MOD GENERATOR";
