@@ -13,7 +13,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Clase
+ * Clase con varios metodos estaticos para trabajar con archivos y carpetas
+ * usa java.io y java.nio
  * @author alejSuescun
  */
 public class ArchivosManager {
@@ -24,7 +25,7 @@ public class ArchivosManager {
      * @param title String con el titulo del archivo (Sin el .txt)
      * @param content String con el contenido del TXT
      */
-    public static void crearArchivoTXT(String path, String title, String content){
+    public static void crearArchivoTXT(String path, String title, String content) throws IllegalArgumentException{
         final String EXTENSION = ".txt";
         Path pathFinal;
         if (path.isBlank()) {
@@ -53,11 +54,19 @@ public class ArchivosManager {
         }
     }
     
-    
+    /**
+     * Metodo para crear carpetas
+     * @param path Stromg con la direccion de la carpeta
+     */
     public static void crearCarpetas(String path){
         throw new UnsupportedOperationException("Aun no programada! :3");
     }
     
+    /**
+     * Metodo para verficar que existan carpetas usando Files.exists
+     * @param path String con la direccion de las carpetas
+     * @return booleano true si hay carpetas
+     */
     public static boolean verificarCarpetas(String path){
         Path pathCarpeta = Paths.get(path);
         return Files.exists(pathCarpeta) && Files.isDirectory(pathCarpeta);
