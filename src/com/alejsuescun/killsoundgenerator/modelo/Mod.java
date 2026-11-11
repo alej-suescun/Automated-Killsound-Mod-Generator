@@ -12,7 +12,15 @@ public abstract class Mod {
     public final String NOMBRE_ARCHIVO = "Killsound";
     private String nombreMod, rutaMod;
     
-    public Mod(String nombreMod, String rutaMod) {
+    public Mod(String nombreMod, String rutaMod) throws IllegalArgumentException{
+        if (!ArchivosManager.isGoodStringForFile(nombreMod)) {
+            throw new IllegalArgumentException("El nombre del mod no puede estar vacio o no cumple los requisitos!");
+        }
+        
+        if (rutaMod.isBlank()) {
+            throw new IllegalArgumentException("La ruta del mod no puede estar vacia!");
+        }
+        
         this.nombreMod = nombreMod;
         this.rutaMod = rutaMod;
     }
