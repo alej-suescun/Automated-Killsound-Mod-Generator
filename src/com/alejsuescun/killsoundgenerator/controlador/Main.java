@@ -6,9 +6,12 @@ package com.alejsuescun.killsoundgenerator.controlador;
 
 //import java.util.Scanner;
 import com.alejsuescun.killsoundgenerator.modelo.AudioManager;
+import com.alejsuescun.killsoundgenerator.modelo.ConsoleTextAreaOutputStream;
 import com.alejsuescun.killsoundgenerator.modelo.ScriptGenerator;
 import com.alejsuescun.killsoundgenerator.vista.*;
 import java.io.File;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -22,7 +25,7 @@ public class Main {
     
     public static void main(String[] args) {
         ventanaPrincipal = new VentanaPrincipal();
-        
+        setSystemOut();
         
         /*
         int opcion;
@@ -38,10 +41,26 @@ public class Main {
         
         JOptionPane.showMessageDialog(null, "Saliendo del programa...", TITLE, JOptionPane.INFORMATION_MESSAGE);
         */
-        
-        System.out.println("Saliendo del programa...");
+        System.out.println("Test");
+        System.out.print("Test2");
+        System.err.println("Test de error");
+        System.out.print("Test3");
+        System.out.print("Test4");
+
     }
-   
+    
+    /**
+     * Metodo para poner el systemOut como la consola de la GUI
+     */
+    public static void setSystemOut(){
+        PrintStream consolaJframe = new PrintStream(new ConsoleTextAreaOutputStream(
+                ventanaPrincipal.getTxtAreaConsola()), true, StandardCharsets.UTF_8);
+        System.setOut(consolaJframe);
+        System.setErr(consolaJframe);
+    }
+    
+    
+    //Antiguo :v
     /**
      * Metodo del menu
      * @param opciones Array de strings que contenga las opciones

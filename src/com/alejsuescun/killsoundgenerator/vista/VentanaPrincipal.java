@@ -65,6 +65,13 @@ public class VentanaPrincipal extends JFrame{
         txtAreaConsole.setText(txtAreaConsole.getText().concat(text)); // Probar con varias lineas
     }
     
+    /**
+     * Metodo para devolver la consola de la GUI
+     * @return JTextArea que seria la consola de la GUI
+     */
+    public JTextArea getTxtAreaConsola(){
+        return txtAreaConsole;
+    }
     
     private JPanel crearPanelArriba(){
         JPanel panelArriba = new JPanel();
