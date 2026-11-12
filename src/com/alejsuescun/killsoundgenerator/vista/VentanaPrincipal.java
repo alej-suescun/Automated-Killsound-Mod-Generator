@@ -59,6 +59,10 @@ public class VentanaPrincipal extends JFrame{
         return txtAreaConsole;
     }
     
+    /**
+     * Panel de la parte de arriba
+     * @return 
+     */
     private JPanel crearPanelArriba(){
         JPanel panelArriba = new JPanel();
         panelArriba.setLayout(new BoxLayout(panelArriba, BoxLayout.X_AXIS));
@@ -69,6 +73,10 @@ public class VentanaPrincipal extends JFrame{
         return panelArriba;
     }
     
+    /**
+     * Panel de abajo que contiene la consola
+     * @return 
+     */
     private JPanel crearPanelAbajo(){
         JPanel panelAbajo = new JPanel();
         panelAbajo.setLayout(new BoxLayout(panelAbajo, BoxLayout.Y_AXIS));
@@ -85,6 +93,10 @@ public class VentanaPrincipal extends JFrame{
         return panelAbajo;
     }
     
+    /**
+     * Panel de propiedades con el nombre y la ruta donde se guarda el mod
+     * @return 
+     */
     private JPanel crearPanelPropiedades(){
         JPanel panelPropiedades = new JPanel();
         JPanel panelNKillsounds = new JPanel();
@@ -108,6 +120,10 @@ public class VentanaPrincipal extends JFrame{
         return panelPropiedades;
     }
     
+    /**
+     * Panel con los botones de crear mod, gestionar archivos y cambiar propiedades
+     * @return 
+     */
     private JPanel crearPanelBotones(){
         JPanel panelBotones = new JPanel();
         panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
