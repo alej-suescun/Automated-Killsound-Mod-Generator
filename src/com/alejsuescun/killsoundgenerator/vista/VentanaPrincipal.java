@@ -50,21 +50,7 @@ public class VentanaPrincipal extends JFrame{
     public String getTxtNombreMod(){
         return txtNombreMod.getText();
     }
-    
-    /**
-     * Metodo para poner texto en la area de la consola del programa
-     * lo va añadiendo entonces usar el \n
-     * @param text String con el texto
-     * @throws NullPointerException si el texto es null
-     */
-    public void setTxtAreaConsole(String text) throws NullPointerException{
-        if (text == null) {
-            throw new NullPointerException("El texto a mostrar no puede ser null!");
-        }
         
-        txtAreaConsole.setText(txtAreaConsole.getText().concat(text)); // Probar con varias lineas
-    }
-    
     /**
      * Metodo para devolver la consola de la GUI
      * @return JTextArea que seria la consola de la GUI
