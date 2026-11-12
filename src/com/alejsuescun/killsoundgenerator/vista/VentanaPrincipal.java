@@ -14,6 +14,7 @@ public class VentanaPrincipal extends JFrame{
     protected final static String TITULO_VENTANA = "AUTOMATED KILLSOUND MOD GENERATOR";
     private JTextField txtNombreMod;
     private JTextField txtPathMod;
+    private JTextArea txtAreaConsole;
     
     /**
      * Crear la ventana principal del programa
@@ -50,6 +51,20 @@ public class VentanaPrincipal extends JFrame{
         return txtNombreMod.getText();
     }
     
+    /**
+     * Metodo para poner texto en la area de la consola del programa
+     * lo va añadiendo entonces usar el \n
+     * @param text String con el texto
+     * @throws NullPointerException si el texto es null
+     */
+    public void setTxtAreaConsole(String text) throws NullPointerException{
+        if (text == null) {
+            throw new NullPointerException("El texto a mostrar no puede ser null!");
+        }
+        
+        txtAreaConsole.setText(txtAreaConsole.getText().concat(text)); // Probar con varias lineas
+    }
+    
     
     private JPanel crearPanelArriba(){
         JPanel panelArriba = new JPanel();
@@ -64,13 +79,15 @@ public class VentanaPrincipal extends JFrame{
     private JPanel crearPanelAbajo(){
         JPanel panelAbajo = new JPanel();
         panelAbajo.setLayout(new BoxLayout(panelAbajo, BoxLayout.Y_AXIS));
-        
-        panelAbajo.add(new JLabel("Ultimos Cambios: "));
-        panelAbajo.add(new JTextArea(
+        txtAreaConsole = new JTextArea(
                 """
                 Mostrar los system.out aqui
                 
-                """));
+                """);
+        txtAreaConsole.setEditable(false);
+        
+        panelAbajo.add(new JLabel("Ultimos Cambios: "));
+        panelAbajo.add(txtAreaConsole);
         
         return panelAbajo;
     }
