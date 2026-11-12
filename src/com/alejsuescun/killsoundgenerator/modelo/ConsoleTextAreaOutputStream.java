@@ -47,7 +47,7 @@ public class ConsoleTextAreaOutputStream extends OutputStream{
         // debido q Swing NO es thread safe
         SwingUtilities.invokeLater(() -> { 
             TXT_AREA_CONSOLE.append(txt);
-            
+            TXT_AREA_CONSOLE.setCaretPosition(TXT_AREA_CONSOLE.getDocument().getLength()); //Moverlo a abajo cuando haya una nueva linea
         });
     }
     

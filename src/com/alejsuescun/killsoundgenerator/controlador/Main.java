@@ -46,7 +46,9 @@ public class Main {
         System.err.println("Test de error");
         System.out.print("Test3");
         System.out.print("Test4");
-
+        for (int i = 5; i < 1000; i++) {
+            System.out.println("test: "+i);
+        }
     }
     
     /**

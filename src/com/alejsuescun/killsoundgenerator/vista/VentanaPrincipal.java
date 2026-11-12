@@ -80,15 +80,21 @@ public class VentanaPrincipal extends JFrame{
     private JPanel crearPanelAbajo(){
         JPanel panelAbajo = new JPanel();
         panelAbajo.setLayout(new BoxLayout(panelAbajo, BoxLayout.Y_AXIS));
+        JScrollPane consolaScroll;
         txtAreaConsole = new JTextArea(
                 """
                 Mostrar los system.out aqui
                 
                 """);
+        
         txtAreaConsole.setEditable(false);
         
+        consolaScroll = new JScrollPane(txtAreaConsole);
+        consolaScroll.setAutoscrolls(true); // que se mueva solo cuando este seleccionando
+
+        
         panelAbajo.add(new JLabel("Ultimos Cambios: "));
-        panelAbajo.add(txtAreaConsole);
+        panelAbajo.add(consolaScroll);
         
         return panelAbajo;
     }
