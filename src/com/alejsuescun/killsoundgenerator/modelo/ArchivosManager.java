@@ -8,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -67,9 +68,19 @@ public class ArchivosManager {
      * @param path String con la direccion de las carpetas
      * @return booleano true si hay carpetas
      */
-    public static boolean verificarCarpetas(String path){
-        Path pathCarpeta = Paths.get(path);
-        return Files.exists(pathCarpeta) && Files.isDirectory(pathCarpeta);
+    public static boolean verificarCarpetas(String path) throws IllegalArgumentException{
+        if (path.isBlank()) {
+            throw new IllegalArgumentException("La ruta no puede estar vacia!");
+        }
+        
+        try {
+            Path pathCarpeta = Paths.get(path);
+            return Files.exists(pathCarpeta) && Files.isDirectory(pathCarpeta);
+        } catch (Exception e) {
+            System.err.println("Ocurrio un error inesperado a la hora de verificar: \""+path+
+                    "\"");
+            return false;
+        }
     }
     
     /**
