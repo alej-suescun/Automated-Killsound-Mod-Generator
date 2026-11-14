@@ -7,6 +7,7 @@ package com.alejsuescun.killsoundgenerator.vista;
 import com.alejsuescun.killsoundgenerator.controlador.Main;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -30,13 +31,24 @@ public class VentanaPrincipal extends JFrame{
         super(TITULO_VENTANA);
         setSize(854, 480);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        
         setLocationRelativeTo(null); //Centrar la ventana en la pantalla
         
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.insets = new Insets(8, 16, 8, 16); // Padding (t, l, d, r)
         
-        
-        add(crearPanelArriba());
-        add(crearPanelAbajo());
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        add(crearPanelArriba(), gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 2;
+        add(crearPanelAbajo(), gbc);
         
         setVisible(true);
     }
