@@ -39,4 +39,11 @@ public class Main {
         System.setOut(consolaJframe);
         System.setErr(consolaJframe);
     }
+    
+    /**
+     * Metodo que se llama a la hora de presionar el boton de crear un mod
+     */
+    public static void onBtnCrearMod(){
+        System.out.println("Aun no implementado :3");
+    }
 }

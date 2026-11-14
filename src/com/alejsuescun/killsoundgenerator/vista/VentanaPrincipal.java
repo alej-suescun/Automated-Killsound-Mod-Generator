@@ -4,8 +4,11 @@
  */
 package com.alejsuescun.killsoundgenerator.vista;
 
+import com.alejsuescun.killsoundgenerator.controlador.Main;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -164,11 +167,24 @@ public class VentanaPrincipal extends JFrame{
         JPanel panelBotones = new JPanel();
         panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
         
-        panelBotones.add(new JButton("Crear Mod"));
+        panelBotones.add(crearBtnCrearMod());
         panelBotones.add(new JButton("Gestionar Archivos"));
         panelBotones.add(new JButton("Cambiar Propiedades"));
         
         return panelBotones;
     }
     
+    private JButton crearBtnCrearMod(){
+        JButton btnCrearMod = new JButton("Crear Mod");
+        btnCrearMod.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.onBtnCrearMod();
+            }
+        }
+        
+        );
+        
+        return btnCrearMod;
+    }
 }
