@@ -65,6 +65,6 @@ public class Main {
      * Metodo que se llama a la hora de presionar el boton que es a lado de la ruta del mod
      */
     public static void onBtnPathMod(){
-        System.out.println("Aun no implementado :3");
+        ventanaPrincipal.setTxtPathMod(ArchivosManager.pedirRutaChooser(ventanaPrincipal)); 
     }
 }

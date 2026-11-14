@@ -4,6 +4,7 @@
  */
 package com.alejsuescun.killsoundgenerator.modelo;
 
+import java.awt.Component;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import javax.swing.JFileChooser;
 
 /**
  * Clase con varios metodos estaticos para trabajar con archivos y carpetas
@@ -112,6 +114,32 @@ public class ArchivosManager {
                     "\"");
             return false;
         }
+    }
+    
+    public static String pediRutaChooser(){
+        return pedirRutaChooser(null);
+    }
+    
+    /**
+     * Metodo para abrir el selector de archivos de java
+     * @param parent JFrame para que se pegue el JFileCHooser (VentanaPrincipal)
+     * @return String con la ruta seleccionada por el usuario
+     */
+    public static String pedirRutaChooser(Component parent){
+        String ruta = null;
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); //Solo seleccionar carpeta
+        
+        int op = chooser.showDialog(parent, "Seleccionar");
+        
+        if (op == JFileChooser.APPROVE_OPTION) {
+            ruta = chooser.getSelectedFile().getAbsolutePath();
+            System.out.println("Ruta seleccionada: \""+ruta+"\"");
+        } else {
+            System.out.println("No se selecciono ninguna ruta");
+        }
+        
+        return ruta;
     }
     
     /**

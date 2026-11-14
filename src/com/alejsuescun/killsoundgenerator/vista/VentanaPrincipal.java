@@ -68,13 +68,30 @@ public class VentanaPrincipal extends JFrame{
     public String getTxtNombreMod(){
         return txtNombreMod.getText();
     }
-        
+    
+    /**
+     * Metodo para obetener el texto que haya en la ruta del mod
+     * @return String con la ruta del mod
+     */
+    public String getTxtPathMod(){
+        return txtPathMod.getText();
+    }
+    
+
     /**
      * Metodo para devolver la consola de la GUI
      * @return JTextArea que seria la consola de la GUI
      */
     public JTextArea getTxtAreaConsola(){
         return txtAreaConsole;
+    }
+    
+    /**
+     * Metodo para poner el texto de la ruta del mod
+     * @param s String con la ruta del mod
+     */
+    public void setTxtPathMod(String s){
+        txtPathMod.setText(s);
     }
     
     /**
