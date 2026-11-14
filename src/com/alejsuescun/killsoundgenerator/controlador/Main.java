@@ -4,7 +4,7 @@
  */
 package com.alejsuescun.killsoundgenerator.controlador;
 
-import com.alejsuescun.killsoundgenerator.modelo.ConsoleTextAreaOutputStream;
+import com.alejsuescun.killsoundgenerator.modelo.*;
 import com.alejsuescun.killsoundgenerator.vista.*;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
@@ -20,17 +20,16 @@ public class Main {
     public static void main(String[] args) {
         ventanaPrincipal = new VentanaPrincipal();
         setSystemOut();
-        
-        System.out.println("Test");
-        System.out.print("Test2");
-        System.err.println("Test de error");
-        System.out.print("Test3");
-        System.out.print("Test4");
-        for (int i = 5; i < 1000; i++) {
-            System.out.println("test: "+i);
-        }
+        printMensajePrincipio();
     }
     
+    /**
+     * Metodo q solo imprime los mensajes del principio
+     */
+    public static void printMensajePrincipio(){
+        System.out.println("Automated Killsound Mod Generator ["+Version.VERSION_PROYECTO+"] para Team Fortess 2");
+        System.out.println("Para empezar escribe el nombre de tu mod y selecciona una carpeta en donde guardarlo");
+    }
     /**
      * Metodo para poner el systemOut como la consola de la GUI
      */

@@ -85,11 +85,7 @@ public class VentanaPrincipal extends JFrame{
         JPanel panelAbajo = new JPanel();
         panelAbajo.setLayout(new BoxLayout(panelAbajo, BoxLayout.Y_AXIS));
         JScrollPane consolaScroll;
-        txtAreaConsole = new JTextArea(
-                """
-                Mostrar los system.out aqui
-                
-                """);
+        txtAreaConsole = new JTextArea("");
         
         txtAreaConsole.setEditable(false);
         
