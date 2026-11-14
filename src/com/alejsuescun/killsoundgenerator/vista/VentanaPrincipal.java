@@ -9,7 +9,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -146,9 +145,7 @@ public class VentanaPrincipal extends JFrame{
      */
     private JPanel crearPanelRutaMod(){
         JPanel panelRutaMod = new JPanel();
-        JButton btnPathMod = new JButton();
-        //ImageIcon iconBtnPathMod = new ImageIcon(getClass().getResource(ICONS_FOLDER+"icon_open_external.png"));
-        
+
         txtPathMod = new JTextField();
         
         panelRutaMod.setLayout(new GridBagLayout());
@@ -162,11 +159,9 @@ public class VentanaPrincipal extends JFrame{
         gbc.weightx = 6; // Para que se vea mas grande el texto
         panelRutaMod.add(txtPathMod, gbc);
         
-        //btnPathMod.setIcon(iconBtnPathMod); poner despues para cuando empieze a decorar
-        
         gbc.gridx = 1;
         gbc.weightx = 1;
-        panelRutaMod.add(btnPathMod, gbc);
+        panelRutaMod.add(crearBtnPathMod(), gbc);
         
         return panelRutaMod;
     }
@@ -180,12 +175,16 @@ public class VentanaPrincipal extends JFrame{
         panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
         
         panelBotones.add(crearBtnCrearMod());
-        panelBotones.add(new JButton("Gestionar Archivos"));
-        panelBotones.add(new JButton("Cambiar Propiedades"));
+        panelBotones.add(crearBtnGestionarArchivos());
+        panelBotones.add(crearBtnCambiarPropiedades());
         
         return panelBotones;
     }
     
+    /**
+     * boton crear mod
+     * @return 
+     */
     private JButton crearBtnCrearMod(){
         JButton btnCrearMod = new JButton("Crear Mod");
         btnCrearMod.addActionListener((ActionEvent e) -> {
@@ -193,5 +192,46 @@ public class VentanaPrincipal extends JFrame{
         });
         
         return btnCrearMod;
+    }
+    
+    /**
+     * Boton gestionar archivos
+     * @return 
+     */
+    private JButton crearBtnGestionarArchivos(){
+        JButton btnGestionarArchivos = new JButton("Gestionar Archivos");
+        
+        btnGestionarArchivos.addActionListener((ActionEvent e)-> {
+            Main.onBtnGestionarArchivos();
+        });
+        
+        return btnGestionarArchivos;
+    }
+    
+    /**
+     * Boton cambiar propiedades
+     * @return 
+     */
+    private JButton crearBtnCambiarPropiedades(){
+        JButton btnCambiarPropiedades = new JButton("Cambiar Propiedades");
+        
+        btnCambiarPropiedades.addActionListener((ActionEvent e)-> {
+            Main.onBtnCambiarPropiedades();
+        });
+        
+        return btnCambiarPropiedades; 
+    }
+    
+    private JButton crearBtnPathMod(){
+        JButton btnPathMod = new JButton();
+        //ImageIcon iconBtnPathMod = new ImageIcon(getClass().getResource(ICONS_FOLDER+"icon_open_external.png"));
+        
+        //btnPathMod.setIcon(iconBtnPathMod); poner despues para cuando empieze a decorar
+        
+        btnPathMod.addActionListener((ActionEvent e)-> {
+            Main.onBtnPathMod();
+        });
+        
+        return btnPathMod;
     }
 }

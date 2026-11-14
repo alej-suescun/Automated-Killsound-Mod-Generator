@@ -46,4 +46,25 @@ public class Main {
     public static void onBtnCrearMod(){
         System.out.println("Aun no implementado :3");
     }
+    
+    /**
+     * Metodo que se llama a la hora de presionar el boton de gestionar archivos
+     */
+    public static void onBtnGestionarArchivos(){
+        System.out.println("Aun no implementado :3");
+    }
+    
+    /**
+     * Metodo que se llama a la hora de presionar el boton de cambiar propiedades
+     */
+    public static void onBtnCambiarPropiedades(){
+        System.out.println("Aun no implementado :3");
+    }
+    
+    /**
+     * Metodo que se llama a la hora de presionar el boton que es a lado de la ruta del mod
+     */
+    public static void onBtnPathMod(){
+        System.out.println("Aun no implementado :3");
+    }
 }
