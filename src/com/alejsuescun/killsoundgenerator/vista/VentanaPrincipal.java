@@ -83,10 +83,23 @@ public class VentanaPrincipal extends JFrame{
      */
     private JPanel crearPanelArriba(){
         JPanel panelArriba = new JPanel();
-        panelArriba.setLayout(new BoxLayout(panelArriba, BoxLayout.X_AXIS));
+        panelArriba.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
         
-        panelArriba.add(crearPanelPropiedades());
-        panelArriba.add(crearPanelBotones());
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.insets = new Insets(8, 8, 8, 8); // Padding (t, l, d, r)
+        
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 15;
+        gbc.weighty = 1;
+        panelArriba.add(crearPanelPropiedades(), gbc);
+        
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        panelArriba.add(crearPanelBotones(), gbc);
         
         return panelArriba;
     }
