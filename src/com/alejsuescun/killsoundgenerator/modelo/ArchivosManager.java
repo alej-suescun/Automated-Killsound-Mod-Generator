@@ -116,9 +116,6 @@ public class ArchivosManager {
         }
     }
     
-    public static String pediRutaChooser(){
-        return pedirRutaChooser(null);
-    }
     
     /**
      * Metodo para abrir el selector de archivos de java
