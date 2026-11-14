@@ -185,11 +185,30 @@ public class VentanaPrincipal extends JFrame{
      */
     private JPanel crearPanelBotones(){
         JPanel panelBotones = new JPanel();
-        panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
+        panelBotones.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
         
-        panelBotones.add(crearBtnCrearMod());
-        panelBotones.add(crearBtnGestionarArchivos());
-        panelBotones.add(crearBtnCambiarPropiedades());
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.insets = new Insets(4, 0, 4, 0); // Padding entre botones (t, l, d, r)
+        
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 2;
+        
+        panelBotones.add(crearBtnCrearMod(), gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        panelBotones.add(crearBtnGestionarArchivos(), gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        panelBotones.add(crearBtnCambiarPropiedades(), gbc);
         
         return panelBotones;
     }
