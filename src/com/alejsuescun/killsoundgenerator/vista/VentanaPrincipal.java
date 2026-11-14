@@ -188,14 +188,9 @@ public class VentanaPrincipal extends JFrame{
     
     private JButton crearBtnCrearMod(){
         JButton btnCrearMod = new JButton("Crear Mod");
-        btnCrearMod.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.onBtnCrearMod();
-            }
-        }
-        
-        );
+        btnCrearMod.addActionListener((ActionEvent e) -> {
+            Main.onBtnCrearMod();
+        });
         
         return btnCrearMod;
     }
