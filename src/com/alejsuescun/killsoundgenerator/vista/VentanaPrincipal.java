@@ -4,6 +4,8 @@
  */
 package com.alejsuescun.killsoundgenerator.vista;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import javax.swing.*;
 
 /**
@@ -12,6 +14,8 @@ import javax.swing.*;
  */
 public class VentanaPrincipal extends JFrame{
     protected final static String TITULO_VENTANA = "AUTOMATED KILLSOUND MOD GENERATOR";
+    protected final static String RESOURCE_FOLDER = "/resources/";
+    protected final static String ICONS_FOLDER = (RESOURCE_FOLDER+"icons/");
     private JTextField txtNombreMod;
     private JTextField txtPathMod;
     private JTextArea txtAreaConsole;
@@ -107,14 +111,13 @@ public class VentanaPrincipal extends JFrame{
         JPanel panelPropiedades = new JPanel();
         JPanel panelNKillsounds = new JPanel();
         txtNombreMod = new JTextField();
-        txtPathMod = new JTextField(); // Cambiarlo por un boton
 
-        
         panelPropiedades.setLayout(new BoxLayout(panelPropiedades, BoxLayout.Y_AXIS)); //Acomodar verticalmente las cosas
         panelPropiedades.add(new JLabel("Nombre del mod: "));
         panelPropiedades.add(txtNombreMod);
         panelPropiedades.add(new JLabel("Ubicacion del mod: "));
-        panelPropiedades.add(txtPathMod);
+
+        panelPropiedades.add(crearPanelRutaMod());
         
         // Poner al lado uno del otro lo de numero de killsounds
         panelNKillsounds.setLayout(new BoxLayout(panelNKillsounds, BoxLayout.X_AXIS));
@@ -124,6 +127,37 @@ public class VentanaPrincipal extends JFrame{
         panelPropiedades.add(panelNKillsounds);
         
         return panelPropiedades;
+    }
+    
+    /**
+     * Metodo para crear el panel que contiene el jTextfield y jbutton de la ruta del mod
+     * @return 
+     */
+    private JPanel crearPanelRutaMod(){
+        JPanel panelRutaMod = new JPanel();
+        JButton btnPathMod = new JButton();
+        //ImageIcon iconBtnPathMod = new ImageIcon(getClass().getResource(ICONS_FOLDER+"icon_open_external.png"));
+        
+        txtPathMod = new JTextField();
+        
+        panelRutaMod.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.fill = GridBagConstraints.BOTH;  // Que crezca en X e Y
+        
+        txtPathMod.setEditable(false);
+        
+        gbc.gridx = 0;
+        gbc.weightx = 6; // Para que se vea mas grande el texto
+        panelRutaMod.add(txtPathMod, gbc);
+        
+        //btnPathMod.setIcon(iconBtnPathMod); poner despues para cuando empieze a decorar
+        
+        gbc.gridx = 1;
+        gbc.weightx = 1;
+        panelRutaMod.add(btnPathMod, gbc);
+        
+        return panelRutaMod;
     }
     
     /**
