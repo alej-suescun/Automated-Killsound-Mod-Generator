@@ -60,8 +60,8 @@ public class ArchivosManager {
     
     /**
      * Metodo para crear carpetas
-     * @param pathBase Stromg con la direccion base de donde quiere crear las carpetas
-     * @param nombreCarpetasArray
+     * @param pathBase String con la ruta base de donde quiere crear las carpetas
+     * @param nombreCarpetasArray Array de string con el nombre de las carpetas, estando de 0 a x el orden
      * @throws java.io.FileNotFoundException
      */
     public static void crearCarpetas(String pathBase, String[] nombreCarpetasArray) throws IllegalArgumentException, FileNotFoundException{
@@ -94,6 +94,26 @@ public class ArchivosManager {
             System.out.println("Se crearon las carpetas: \""+pathCarpetas.toString()+"\" en: \""+
                     pathBase+"\"");
         }
+    }
+    
+    /**
+     * Metodo para crear carpetas
+     * @param PathBase String con la ruta base de la carpeta
+     * @param nombreCarpeta Nombre de las carpetas
+     * @throws IllegalArgumentException
+     * @throws FileNotFoundException 
+     */
+    public static void crearCarpetas(String PathBase, String nombreCarpeta) throws IllegalArgumentException, FileNotFoundException{
+        String[] nombreCarpetasArray = new String[1];
+        
+        if (!isGoodStringForFile(PathBase)) {
+            System.err.println("El nombre \""+nombreCarpeta+"\" no es valido para una carpeta!");
+            throw new IllegalArgumentException("El string no es valido para una carpeta");
+        }
+        
+        nombreCarpetasArray[0] = nombreCarpeta;
+        
+        crearCarpetas(PathBase, nombreCarpetasArray);
     }
     
     /**
