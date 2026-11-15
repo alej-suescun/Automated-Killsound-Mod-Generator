@@ -4,6 +4,8 @@
  */
 package com.alejsuescun.killsoundgenerator.modelo;
 
+import java.io.FileNotFoundException;
+
 /**
  * Clase base para un mod
  * @author alejSuescun
@@ -25,8 +27,18 @@ public abstract class Mod {
         this.rutaMod = rutaMod;
     }
     
+    /**
+     * Metodo para crear la carpeta base del mod
+     */
     public void crearCarpeta(){
-        throw new UnsupportedOperationException("Aun no programada! :3");
+        System.out.println("Creando carpetas para \""+nombreMod+"\" en: \""+rutaMod+"\"");
+        try {
+            ArchivosManager.crearCarpetas(rutaMod, nombreMod);
+        } catch (FileNotFoundException e) {
+            System.err.println("No se pudieron crear las carpetas para: \""+nombreMod+"\"");
+            System.err.println("    La ruta: \""+rutaMod+"\" no es valida!");
+            System.err.println("    Por favor seleccione otra diferente!");
+        }
     }
     
     public boolean verificarCarpeta(){
