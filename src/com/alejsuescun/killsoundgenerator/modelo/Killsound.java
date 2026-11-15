@@ -15,14 +15,14 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  *
  * @author alejSuescun
  */
-public class Audio {
+public class Killsound {
     private File audioFileOld, audioFileNew;
     
     /**
      * Constructo para un audio de un mod
      * @param audioFileOld Objeto de file que direccione al archivo en su antigua direccion
      */
-    public Audio(File audioFileOld) throws IllegalArgumentException{
+    public Killsound(File audioFileOld) throws IllegalArgumentException{
         if (!validWav(audioFileOld)) {
             throw new IllegalArgumentException("El archivo proporcionado no cumple los requisitos");
         }

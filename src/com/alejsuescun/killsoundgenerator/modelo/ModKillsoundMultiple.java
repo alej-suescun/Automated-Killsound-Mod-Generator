@@ -11,9 +11,9 @@ import java.util.ArrayList;
  * @author alejSuescun
  */
 public class ModKillsoundMultiple extends Mod{
-    private ArrayList<Audio> arrayKillsounds;
+    private ArrayList<Killsound> arrayKillsounds;
     
-    public ModKillsoundMultiple(ArrayList<Audio> arrayKillsounds, String nombreMod, String rutaMod) throws IllegalArgumentException {
+    public ModKillsoundMultiple(ArrayList<Killsound> arrayKillsounds, String nombreMod, String rutaMod) throws IllegalArgumentException {
         super(nombreMod, rutaMod);
         
         if (!isGoodArrayKillsounds(arrayKillsounds)) {
@@ -34,15 +34,15 @@ public class ModKillsoundMultiple extends Mod{
      * Retorna el array de killsounds del mod
      * @return arrayKillsounds
      */
-    public ArrayList<Audio> getArrayKillsounds(){
+    public ArrayList<Killsound> getArrayKillsounds(){
         return arrayKillsounds;
     }
     
     /**
      * Metodo para poner un nuevo array de killsounds
-     * @param arrayKillsounds ArrayList con clase Audio minimo 2
+     * @param arrayKillsounds ArrayList con clase Killsound minimo 2
      */
-    public void setArrayKillsounds(ArrayList<Audio> arrayKillsounds){
+    public void setArrayKillsounds(ArrayList<Killsound> arrayKillsounds){
         if (!isGoodArrayKillsounds(arrayKillsounds)) {
             throw new IllegalArgumentException("El array de killsounds no puede ser nulo ni tener menos de 2 killsounds");
         }
@@ -62,10 +62,10 @@ public class ModKillsoundMultiple extends Mod{
     /**
      * Metodo para verificar si un array killsounds esta bien 
      * que no sea nullo ni que sea de menos de 2 killsounds
-     * @param arrayKillsounds ArrayList con clase Audio
+     * @param arrayKillsounds ArrayList con clase Killsound
      * @return booleano true si esta bien
      */
-    public static boolean isGoodArrayKillsounds(ArrayList<Audio> arrayKillsounds){
+    public static boolean isGoodArrayKillsounds(ArrayList<Killsound> arrayKillsounds){
         return arrayKillsounds != null && arrayKillsounds.size() > 1;
     }
 }
