@@ -4,6 +4,8 @@
  */
 package com.alejsuescun.killsoundgenerator.modelo;
 
+import java.io.FileNotFoundException;
+
 /**
  * Clase que es para un mod de un solo killsound
  * @author alejSuescun
@@ -22,7 +24,7 @@ public class ModKillsound extends Mod{
     public Killsound getKillsound() {
         return killsound;
     }
-
+    
     public void setKillsound(Killsound killsound) {
         if (isGoodKillsound(killsound)) {
             throw new IllegalArgumentException("El killsound no puede ser null!");
@@ -30,9 +32,30 @@ public class ModKillsound extends Mod{
         this.killsound = killsound;
     }
     
+    /**
+     * Metodo que crea la subCarpetas del mod,
+     * debido que es un solo mod se creara solamente: .../nombreMod/sound/ui
+     * Se sigue de acuerdo a lo que dice la <a href="https://wiki.teamfortress.com/wiki/Hit_Sound#Custom_Hit_Sounds">wiki de team fortress 2</a>
+     */
     @Override
     public void crearSubCarpetas() {
-        throw new UnsupportedOperationException("Aun no programada :3");
+        if (!verificarCarpeta()) {
+            System.err.println("No se pueden crear las subcarpetas debido que aun no se ha creado la carpeta principal");
+            return;
+        }
+        
+        String[] nombreCarpetasArray = {NOMBRE_CARPETA_SOUND, NOMBRE_CARPETA_SOUND_UI};
+        String nombreMod = getNombreMod();
+        String rutaMod = getRutaMod();
+        String rutaBaseConcatenada = ArchivosManager.concatDosRutas(rutaMod, nombreMod);
+        try {
+            System.out.println("Creando subcarpetas para: "+nombreMod);
+            ArchivosManager.crearCarpetas(rutaBaseConcatenada, nombreCarpetasArray);
+        } catch (FileNotFoundException e) {
+            System.err.println("No se pudieron crear las subcarpetas para: "+nombreMod);
+            System.err.println("    La ruta: \""+rutaBaseConcatenada+"\" no es valida!");
+            System.err.println("    Por favor seleccione otra diferente!");
+        }
     }
 
     @Override
