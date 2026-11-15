@@ -63,14 +63,14 @@ public class VentanaPrincipalControlador {
      * Metodo que se llama a la hora de presionar el boton de gestionar archivos
      */
     private void onBtnGestionarArchivos(){
-        VentanaArchivos ventanaArchivos = new VentanaArchivos(ventanaPrincipal);
+        VentanaArchivo ventanaArchivo = new VentanaArchivo(ventanaPrincipal);
     }
     
     /**
      * Metodo que se llama a la hora de presionar el boton de cambiar propiedades
      */
     private void onBtnCambiarPropiedades(){
-        System.out.println("Aun no implementado :3");
+        VentanaPropiedades ventanaPropiedades = new VentanaPropiedades(ventanaPrincipal);
     }
     
     /**

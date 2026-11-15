@@ -10,12 +10,12 @@ import javax.swing.*;
 
 /**
  *
- * @author alejSuescun
+ * @author suesc
  */
-public class VentanaArchivos extends JDialog{
+public class VentanaArchivo extends JDialog{
 
-    public VentanaArchivos(VentanaPrincipal ventanaPrincipal) {
-        super(ventanaPrincipal, VentanaPrincipal.TITULO_VENTANA, true);
+    public VentanaArchivo(VentanaPrincipal ventanaPrincipal) {
+        super(ventanaPrincipal, "Gestion de archivos", true);
 
         setSize(480, 480);
         setLocationRelativeTo(ventanaPrincipal);
