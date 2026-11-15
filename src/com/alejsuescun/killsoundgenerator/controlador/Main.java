@@ -5,6 +5,7 @@
 package com.alejsuescun.killsoundgenerator.controlador;
 
 import com.alejsuescun.killsoundgenerator.vista.VentanaPrincipal;
+import javax.swing.SwingUtilities;
 
 
 /**
@@ -13,9 +14,12 @@ import com.alejsuescun.killsoundgenerator.vista.VentanaPrincipal;
  */
 public class Main {    
     public static void main(String[] args) {
-        VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-        VentanaPrincipalControlador ventanaPrincipalControlador = new VentanaPrincipalControlador(ventanaPrincipal);
-        
-        ventanaPrincipalControlador.printMensajePrincipio();
+        SwingUtilities.invokeLater(() -> { 
+            VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
+            VentanaPrincipalControlador ventanaPrincipalControlador = new VentanaPrincipalControlador(ventanaPrincipal);
+
+            ventanaPrincipalControlador.printMensajePrincipio();
+        });
+
     }
 }
