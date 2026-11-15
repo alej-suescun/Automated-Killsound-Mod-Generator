@@ -4,21 +4,51 @@
  */
 package com.alejsuescun.killsoundgenerator.modelo;
 
+import java.util.ArrayList;
+
 /**
  * Clase que es para un mod con multiples killsounds
  * @author alejSuescun
  */
 public class ModKillsoundMultiple extends Mod{
-    private int nKillsounds;
-
-    public ModKillsoundMultiple(int nKillsounds, String nombreMod, String rutaMod) throws IllegalArgumentException {
+    private ArrayList<Audio> arrayKillsounds;
+    
+    public ModKillsoundMultiple(ArrayList<Audio> arrayKillsounds, String nombreMod, String rutaMod) throws IllegalArgumentException {
         super(nombreMod, rutaMod);
-        if (!isGoodNKillsounds(nKillsounds)) {
-            throw new IllegalArgumentException("El numero de killsounds no puede ser negativo!");
+        
+        if (!isGoodArrayKillsounds(arrayKillsounds)) {
+            throw new IllegalArgumentException("El array de killsounds no puede ser nulo ni tener menos de 2 killsounds");
         }
-        this.nKillsounds = nKillsounds;
+        this.arrayKillsounds = arrayKillsounds;
     }
-
+    
+    /**
+     * Retorna el numero de killsounds que tiene el mod
+     * @return entero con el numero de killsounds
+     */
+    public int getNumKillsounds() {
+        return arrayKillsounds.size();
+    }
+    
+    /**
+     * Retorna el array de killsounds del mod
+     * @return arrayKillsounds
+     */
+    public ArrayList<Audio> getArrayKillsounds(){
+        return arrayKillsounds;
+    }
+    
+    /**
+     * Metodo para poner un nuevo array de killsounds
+     * @param arrayKillsounds ArrayList con clase Audio minimo 2
+     */
+    public void setArrayKillsounds(ArrayList<Audio> arrayKillsounds){
+        if (!isGoodArrayKillsounds(arrayKillsounds)) {
+            throw new IllegalArgumentException("El array de killsounds no puede ser nulo ni tener menos de 2 killsounds");
+        }
+        this.arrayKillsounds = arrayKillsounds;
+    }
+    
     @Override
     public void crearSubCarpetas() {
         throw new UnsupportedOperationException("Aun no programada :3");
@@ -29,16 +59,13 @@ public class ModKillsoundMultiple extends Mod{
         throw new UnsupportedOperationException("Aun no programada :3");
     }
     
-    
-    
-    
     /**
-     * Metodo para mirar si los numeros de killsounds estan bien
-     * Requisitos: Que sea mayor o igual a 0
-     * @param nKillsounds entero con numero de killsounds
+     * Metodo para verificar si un array killsounds esta bien 
+     * que no sea nullo ni que sea de menos de 2 killsounds
+     * @param arrayKillsounds ArrayList con clase Audio
      * @return booleano true si esta bien
      */
-    public static boolean isGoodNKillsounds(int nKillsounds){
-        return (nKillsounds>=0);
+    public static boolean isGoodArrayKillsounds(ArrayList<Audio> arrayKillsounds){
+        return arrayKillsounds != null && arrayKillsounds.size() > 1;
     }
 }
