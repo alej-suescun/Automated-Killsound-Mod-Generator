@@ -12,7 +12,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
- *
+ * Clase para almacenar un archivo/killsound guardando en una clase file el archivo viejo
  * @author alejSuescun
  */
 public class Killsound {
