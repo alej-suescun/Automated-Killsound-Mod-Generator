@@ -4,24 +4,23 @@
  */
 package com.alejsuescun.killsoundgenerator.vista;
 
-import com.alejsuescun.killsoundgenerator.controlador.Main;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
- * Clase para controlar y crear la ventana principal del programa
+ * Clase para crear la ventana principal del programa
  * @author suesc
  */
 public class VentanaPrincipal extends JFrame{
     protected final static String TITULO_VENTANA = "AUTOMATED KILLSOUND MOD GENERATOR";
     protected final static String RESOURCE_FOLDER = "/resources/";
     protected final static String ICONS_FOLDER = (RESOURCE_FOLDER+"icons/");
-    private JTextField txtNombreMod;
-    private JTextField txtPathMod;
+    private JTextField txtNombreMod, txtPathMod;
     private JTextArea txtAreaConsole;
+    private JButton btnCrearMod, btnGestionarArchivos, btnCambiarPropiedades, btnPathMod;
     
     /**
      * Crear la ventana principal del programa
@@ -85,13 +84,45 @@ public class VentanaPrincipal extends JFrame{
     public JTextArea getTxtAreaConsola(){
         return txtAreaConsole;
     }
-    
+        
     /**
      * Metodo para poner el texto de la ruta del mod
      * @param s String con la ruta del mod
      */
     public void setTxtPathMod(String s){
         txtPathMod.setText(s);
+    }
+    
+    /**
+     * Metodo para agregar un action listener al boton de crear mod
+     * @param l 
+     */
+    public void setBtnCrearModListener(ActionListener l){
+        btnCrearMod.addActionListener(l);
+    }
+    
+    /**
+     * Metodo para agregar un action listener al boton de gestionar archivos
+     * @param l 
+     */
+    public void setBtnGestionarArchivosListener(ActionListener l){
+        btnGestionarArchivos.addActionListener(l);
+    }
+    
+    /**
+     * Metodo para agregar un action listener al boton de cambiar propiedades
+     * @param l 
+     */
+    public void setBtnCambiarPropiedadesListener(ActionListener l){
+        btnCambiarPropiedades.addActionListener(l);
+    }
+    
+    /**
+     * Metodo para agregar un action listener al boton de cambiar propiedades
+     * @param l 
+     */
+    public void setBtnPathModListener(ActionListener l){
+        btnPathMod.addActionListener(l);
     }
     
     /**
@@ -231,55 +262,44 @@ public class VentanaPrincipal extends JFrame{
     }
     
     /**
-     * boton crear mod
+     * Metodo que configura el boton crear mod
      * @return 
      */
     private JButton crearBtnCrearMod(){
-        JButton btnCrearMod = new JButton("Crear Mod");
-        btnCrearMod.addActionListener((ActionEvent e) -> {
-            Main.onBtnCrearMod();
-        });
-        
+        btnCrearMod = new JButton("Crear Mod");
+
         return btnCrearMod;
     }
     
     /**
-     * Boton gestionar archivos
+     * Metodo que configura el boton gestionar archivos
      * @return 
      */
     private JButton crearBtnGestionarArchivos(){
-        JButton btnGestionarArchivos = new JButton("Gestionar Archivos");
-        
-        btnGestionarArchivos.addActionListener((ActionEvent e)-> {
-            Main.onBtnGestionarArchivos();
-        });
+        btnGestionarArchivos = new JButton("Gestionar Archivos");
         
         return btnGestionarArchivos;
     }
     
     /**
-     * Boton cambiar propiedades
+     * Metodo que configura el boton cambiar propiedades
      * @return 
      */
     private JButton crearBtnCambiarPropiedades(){
-        JButton btnCambiarPropiedades = new JButton("Cambiar Propiedades");
-        
-        btnCambiarPropiedades.addActionListener((ActionEvent e)-> {
-            Main.onBtnCambiarPropiedades();
-        });
+        btnCambiarPropiedades = new JButton("Cambiar Propiedades");
         
         return btnCambiarPropiedades; 
     }
     
+    /**
+     * Metodo que configura el boton path mod
+     * @return 
+     */
     private JButton crearBtnPathMod(){
-        JButton btnPathMod = new JButton();
+        btnPathMod = new JButton();
         //ImageIcon iconBtnPathMod = new ImageIcon(getClass().getResource(ICONS_FOLDER+"icon_open_external.png"));
         
         //btnPathMod.setIcon(iconBtnPathMod); poner despues para cuando empieze a decorar
-        
-        btnPathMod.addActionListener((ActionEvent e)-> {
-            Main.onBtnPathMod();
-        });
         
         return btnPathMod;
     }
