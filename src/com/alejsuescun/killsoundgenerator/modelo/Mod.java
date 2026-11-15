@@ -11,7 +11,26 @@ import java.io.FileNotFoundException;
  * @author alejSuescun
  */
 public abstract class Mod {
-    public final String NOMBRE_ARCHIVO = "Killsound";
+    /**
+     * nombre que debe tener los archivos de killsound
+     * de acuerdo a la <a href="https://wiki.teamfortress.com/wiki/Hit_Sound#Custom_Hit_Sounds">wiki de team fortress 2</a>
+     */
+    public static final String NOMBRE_ARCHIVO = "killsound";
+    /**
+     * nombre que debe tener la carpeta donde va el soundscript
+     * de acuerdo a <a href="https://developer.valvesoftware.com/wiki/Soundscripts">Valve Developer Community</a>
+     */
+    public static final String NOMBRE_CARPETA_SCRIPTS = "scripts";
+    /**
+     * nombre que debe tener la carpeta de sonidos en team fortress 2
+     * de acuerdo a la <a href="https://wiki.teamfortress.com/wiki/Hit_Sound#Custom_Hit_Sounds">wiki de team fortress 2</a>
+     */
+    public static final String NOMBRE_CARPETA_SOUND = "sound";
+    /**
+     * nombre que debe tener la carpeta de ui (donde van los killsounds) en team fortress 2
+     * de acuerdo a la <a href="https://wiki.teamfortress.com/wiki/Hit_Sound#Custom_Hit_Sounds">wiki de team fortress 2</a>
+     */
+    public static final String NOMBRE_CARPETA_SOUND_UI = "ui";
     private String nombreMod, rutaMod;
     
     public Mod(String nombreMod, String rutaMod) throws IllegalArgumentException{
