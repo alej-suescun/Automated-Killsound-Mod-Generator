@@ -136,6 +136,17 @@ public class ArchivosManager {
         }
     }
     
+    /**
+     * Metodo para verficar que existan carpetas usando Files.exists
+     * Concatenando la ruta base con una carpeta
+     * @param pathBase String con la ruta base
+     * @param nombreCarpeta String con el nombre de la carpeta
+     * @return booleano true si hay carpetas
+     */
+    public static boolean verificarCarpetas(String pathBase, String nombreCarpeta){
+        return verificarCarpetas(Path.of(pathBase, nombreCarpeta).toString());
+    }
+    
     
     /**
      * Metodo para abrir el selector de archivos de java
