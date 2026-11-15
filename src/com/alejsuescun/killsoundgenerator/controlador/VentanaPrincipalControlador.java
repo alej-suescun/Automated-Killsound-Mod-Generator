@@ -63,7 +63,7 @@ public class VentanaPrincipalControlador {
      * Metodo que se llama a la hora de presionar el boton de gestionar archivos
      */
     private void onBtnGestionarArchivos(){
-        System.out.println("Aun no implementado :3");
+        VentanaArchivos ventanaArchivos = new VentanaArchivos(ventanaPrincipal);
     }
     
     /**
