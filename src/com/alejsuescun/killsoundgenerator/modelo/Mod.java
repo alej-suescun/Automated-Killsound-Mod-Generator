@@ -47,6 +47,45 @@ public abstract class Mod {
     }
     
     /**
+     * Metodo para obtener el nombre del mod
+     * @return String con el nombre del mod
+     */
+    public String getNombreMod() {
+        return nombreMod;
+    }
+    
+    /**
+     * Metodo para obtener la ruta del mod
+     * @return String con la ruta del mod
+     */
+    public String getRutaMod() {
+        return rutaMod;
+    }
+    
+    /**
+     * Metodo para obtener el nombre del mod
+     * @param nombreMod string con el nombre del mod
+     */
+    public void setNombreMod(String nombreMod) throws IllegalArgumentException{
+        if (!ArchivosManager.isGoodStringForFile(nombreMod)) {
+            throw new IllegalArgumentException("El nombre del mod no puede estar vacio o no cumple los requisitos!");
+        }
+        this.nombreMod = nombreMod;
+    }
+    
+    /**
+     * Metodo para poner una ruta para el mod
+     * @param rutaMod string con la ruta del mod
+     */
+    public void setRutaMod(String rutaMod) throws IllegalArgumentException{
+        if (rutaMod.isBlank()) {
+            throw new IllegalArgumentException("La ruta del mod no puede estar vacia!");
+        }
+        this.rutaMod = rutaMod;
+    }
+    
+    
+    /**
      * Metodo para crear la carpeta base del mod
      */
     public void crearCarpeta(){
