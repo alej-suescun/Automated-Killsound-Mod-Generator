@@ -57,10 +57,21 @@ public class ModKillsound extends Mod{
             System.err.println("    Por favor seleccione otra diferente!");
         }
     }
-
+    
+    /**
+     * Metodo para verficar que existan las subcarpetas
+     * ../sound/ui
+     * @return booleano true si existen
+     */
     @Override
     public boolean verificarSubCarpetas() {
-        throw new UnsupportedOperationException("Aun no programada :3");
+        String nombreMod = getNombreMod();
+        String rutaMod = getRutaMod();
+        String rutaBaseConcatenada = ArchivosManager.concatDosRutas(rutaMod, nombreMod);
+        String rutaSonido = ArchivosManager.concatDosRutas(rutaBaseConcatenada, NOMBRE_CARPETA_SOUND);
+        String rutaUI = ArchivosManager.concatDosRutas(rutaSonido, NOMBRE_CARPETA_SOUND_UI);
+        
+        return ArchivosManager.verificarCarpetas(rutaUI);
     }
     
     /**
