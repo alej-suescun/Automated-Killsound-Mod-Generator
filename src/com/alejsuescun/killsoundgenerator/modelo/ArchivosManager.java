@@ -171,6 +171,16 @@ public class ArchivosManager {
     }
     
     /**
+     * Metodo que concatena dos rutas sin importar el sistema operativo
+     * @param ruta1 String con la primera parte de la ruta
+     * @param ruta2 String con la segunda parte de la ruta
+     * @return String con las dos rutas concatenadas
+     */
+    public static String concatDosRutas(String ruta1, String ruta2){
+        return Path.of(ruta1, ruta2).toString();
+    }
+    
+    /**
      * Metodo para verificar si es string es valido para el titulo de un archivo
      * revisando que no tenga ninguno de los siguientes caracteres: /\|:*?"<>
      * @param str El string
