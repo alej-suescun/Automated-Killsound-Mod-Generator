@@ -41,8 +41,12 @@ public abstract class Mod {
         }
     }
     
+    /**
+     * Metodo para verificar que exista la carpeta base del mod
+     * @return booleano true si existen
+     */
     public boolean verificarCarpeta(){
-        throw new UnsupportedOperationException("Aun no programada! :3");
+        return ArchivosManager.verificarCarpetas(rutaMod, nombreMod);
     }
     
     public abstract void crearSubCarpetas();
