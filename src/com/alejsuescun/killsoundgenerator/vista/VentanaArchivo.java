@@ -11,8 +11,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
- *
- * @author suesc
+ * Clase que es  la Ventana para la gestion de los archivos del mod
+ * @author alejSuescun
  */
 public class VentanaArchivo extends JDialog{
     JButton btnSelecArchivos, btnSelecFolder;
@@ -50,6 +50,10 @@ public class VentanaArchivo extends JDialog{
         btnSelecArchivos.addActionListener(l);
     }
     
+    /**
+     * Metodo para agregar un action listener al boton de seleccionar por carpeta
+     * @param l 
+     */
     public void setBtnSelecFolderListener(ActionListener l){
         btnSelecFolder.addActionListener(l);
     }
