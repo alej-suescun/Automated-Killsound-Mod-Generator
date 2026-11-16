@@ -35,6 +35,10 @@ public class VentanaArchivo extends JDialog{
         gbc.anchor = GridBagConstraints.PAGE_START;
         add(crearPanelBtnsAgregar(), gbc);
         
+        gbc.gridy = 1;
+        gbc.weighty = 10;
+        add(crearPanelArchivosSelecionados(), gbc);
+        
         setVisible(true);
     }
     
@@ -76,6 +80,27 @@ public class VentanaArchivo extends JDialog{
         gbc.weighty = 1;
         panel.add(crearBtnSelecFolder(), gbc);
         
+        return panel;
+    }
+    
+    /**
+     * Metodo para crear el panel q tiene los archivos seleccionados
+     * @return 
+     */
+    private JPanel crearPanelArchivosSelecionados(){
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+        
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        panel.add(new JLabel("Archivos Seleccionados"), gbc);
+        gbc.gridy = 1;
+        gbc.weighty = 10;
+        panel.add(new PanelArchivosSeleccionados(), gbc);
         return panel;
     }
     
