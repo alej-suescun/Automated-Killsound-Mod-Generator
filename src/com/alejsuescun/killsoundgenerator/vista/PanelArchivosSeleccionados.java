@@ -5,10 +5,12 @@
 package com.alejsuescun.killsoundgenerator.vista;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.*;
 
 /**
@@ -19,6 +21,7 @@ public class PanelArchivosSeleccionados extends JPanel{
     public static final String[] NOMBRES_TIPOS_ORGANIZAR = {"Nombre", "Fecha"};
     private JButton btnBorrarArchivos;
     private JComboBox<String> btnComboOrganizar;
+    private JPanel panelArchivos;
     
     public PanelArchivosSeleccionados() {
         setLayout(new GridBagLayout());
@@ -33,6 +36,12 @@ public class PanelArchivosSeleccionados extends JPanel{
         gbc.weighty = 1;
         gbc.anchor = GridBagConstraints.PAGE_START;
         add(crearPanelOrganizarBorrar(), gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 10;
+        add(crearPanelArchivos(), gbc);
     }
     
     /**
@@ -49,6 +58,36 @@ public class PanelArchivosSeleccionados extends JPanel{
      */
     public void setBtnComboOrganizarListener(ActionListener l){
         btnComboOrganizar.addActionListener(l);
+    }
+    
+    /**
+     * Metodo para añadir un archivo al panel de archivos
+     * @param nombre String con el nombre
+     * @param ruta String con la ruta
+     * @param fecha String con la fecha
+     */
+    public void addArchivo(String nombre, String ruta, String fecha){
+        panelArchivos.add(new PanelArchivo(nombre, ruta, fecha));
+    }
+    
+    /**
+     * Retorna una arrayList con todos los archivos que estan en la GUI
+     * @return arraylist con los PanelArchivo, si no hay ninguno null
+     */
+    public ArrayList<PanelArchivo> getArchivos(){
+        ArrayList<PanelArchivo> archivos = new ArrayList<>(1);
+        try {
+            Component[] componentesPanel = panelArchivos.getComponents();
+
+            for (Component component : componentesPanel) {
+                if (component instanceof PanelArchivo archivo) {
+                   archivos.add(archivo);
+                }
+            }
+            return archivos;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return null; // No tenia ningun archivo
+        }
     }
     
     /**
@@ -97,6 +136,17 @@ public class PanelArchivosSeleccionados extends JPanel{
         subPanel.add(crearBtnComboOrganizar(), gbc);
         
         return subPanel;
+    }
+    
+    /**
+     * Crea el panel que contiene los archivos
+     * @return 
+     */
+    private JPanel crearPanelArchivos(){
+        panelArchivos = new JPanel();
+        panelArchivos.setLayout(new BoxLayout(panelArchivos, BoxLayout.Y_AXIS));
+        
+        return panelArchivos;
     }
     
     /**
