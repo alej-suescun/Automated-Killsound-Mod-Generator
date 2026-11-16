@@ -8,6 +8,7 @@ import com.alejsuescun.killsoundgenerator.modelo.*;
 import com.alejsuescun.killsoundgenerator.vista.*;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import javax.swing.SwingUtilities;
 
 /**
  * Clase que con controla los botones y cosas de VentanaPrincipal
@@ -15,7 +16,8 @@ import java.nio.charset.StandardCharsets;
  */
 public class VentanaPrincipalControlador {
     private final VentanaPrincipal ventanaPrincipal;
-
+    private VentanaArchivo ventanaArchivo;
+    
     public VentanaPrincipalControlador(VentanaPrincipal ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
         init();
@@ -63,7 +65,17 @@ public class VentanaPrincipalControlador {
      * Metodo que se llama a la hora de presionar el boton de gestionar archivos
      */
     private void onBtnGestionarArchivos(){
-        VentanaArchivo ventanaArchivo = new VentanaArchivo(ventanaPrincipal);
+        SwingUtilities.invokeLater(() -> {
+            if (ventanaArchivo != null && ventanaArchivo.isDisplayable()) {
+                ventanaArchivo.setVisible(true);
+                ventanaArchivo.toFront();
+                ventanaArchivo.requestFocus();
+                return;
+            }
+            
+            ventanaArchivo = new VentanaArchivo(ventanaPrincipal);
+            VentanaArchivoControlador ventanaArchivoControlador = new VentanaArchivoControlador(ventanaArchivo);
+        });
     }
     
     /**
