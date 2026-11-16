@@ -17,6 +17,7 @@ import javax.swing.SwingUtilities;
 public class VentanaPrincipalControlador {
     private final VentanaPrincipal ventanaPrincipal;
     private VentanaArchivo ventanaArchivo;
+    private VentanaPropiedades ventanaPropiedades;
     
     public VentanaPrincipalControlador(VentanaPrincipal ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
@@ -82,7 +83,17 @@ public class VentanaPrincipalControlador {
      * Metodo que se llama a la hora de presionar el boton de cambiar propiedades
      */
     private void onBtnCambiarPropiedades(){
-        VentanaPropiedades ventanaPropiedades = new VentanaPropiedades(ventanaPrincipal);
+        SwingUtilities.invokeLater(() -> {
+            if (ventanaPropiedades != null && ventanaPropiedades.isDisplayable()) {
+                ventanaPropiedades.setVisible(true);
+                ventanaPropiedades.toFront();
+                ventanaPropiedades.requestFocus();
+                return;
+            }
+            
+            ventanaPropiedades = new VentanaPropiedades(ventanaPrincipal);
+            // aca el ventana propiedades controlador pero no lo he creado cff
+        });
     }
     
     /**
