@@ -7,14 +7,15 @@ package com.alejsuescun.killsoundgenerator.vista;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
- *
+ * Clase con que muestra la informacion de un killsound siendo nombre, ruta y fecha
  * @author alejSuescun
  */
-public class PanelArchivo extends JPanel{
+public class PanelArchivo extends JPanel {
     private JCheckBox btnCheckSelec;
     private JLabel labelNombre, labelRuta, labelFecha;
     
@@ -23,6 +24,8 @@ public class PanelArchivo extends JPanel{
         GridBagConstraints gbc = new GridBagConstraints();
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
         
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(4, 8, 4, 8); 
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 3;
