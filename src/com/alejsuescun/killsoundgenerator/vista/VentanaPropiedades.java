@@ -19,7 +19,7 @@ public class VentanaPropiedades extends JDialog{
     private JCheckBox checkForMvM, checkForMoverArchivos, checkForCreditsSoundscript;
     
     public VentanaPropiedades(VentanaPrincipal ventanaPrincipal) {
-        super(ventanaPrincipal,("Propiedades"), true);
+        super(ventanaPrincipal,("Propiedades"), false);
 
         setSize(480, 480);
         setLocationRelativeTo(ventanaPrincipal);
