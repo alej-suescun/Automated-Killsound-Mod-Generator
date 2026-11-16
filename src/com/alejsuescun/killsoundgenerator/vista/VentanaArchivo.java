@@ -18,7 +18,7 @@ public class VentanaArchivo extends JDialog{
     JButton btnSelecArchivos, btnSelecFolder;
     
     public VentanaArchivo(VentanaPrincipal ventanaPrincipal) {
-        super(ventanaPrincipal, "Gestion de archivos", true);
+        super(ventanaPrincipal, "Gestion de archivos", false);
 
         setSize(480, 480);
         setLocationRelativeTo(ventanaPrincipal);
