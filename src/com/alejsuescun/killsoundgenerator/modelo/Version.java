@@ -14,5 +14,5 @@ package com.alejsuescun.killsoundgenerator.modelo;
  * @author alejSuescun
  */
 public class Version {
-    public static final String VERSION_PROYECTO = "A-2.0";
+    public static final String VERSION_PROYECTO = "B-2.0";
 }

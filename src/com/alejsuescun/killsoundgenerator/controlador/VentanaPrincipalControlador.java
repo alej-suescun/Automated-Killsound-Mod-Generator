@@ -126,6 +126,10 @@ public class VentanaPrincipalControlador {
         
         mod.crearCarpeta();
         mod.crearSubCarpetas();
+        mod.moverArchivos();
+        
+        JOptionPane.showMessageDialog(ventanaPrincipal, "El mod se creo correctamente!", "Mod Finalizado", JOptionPane.INFORMATION_MESSAGE);
+        System.out.println("Mod creado correctamente en: "+pathMod);
     }
 
     /**

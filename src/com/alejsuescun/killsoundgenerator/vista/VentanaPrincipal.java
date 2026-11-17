@@ -180,7 +180,7 @@ public class VentanaPrincipal extends JFrame{
      */
     private JPanel crearPanelPropiedades(){
         JPanel panelPropiedades = new JPanel();
-        JPanel panelNKillsounds = new JPanel();
+        //JPanel panelNKillsounds = new JPanel();
         txtNombreMod = new JTextField();
 
         panelPropiedades.setLayout(new BoxLayout(panelPropiedades, BoxLayout.Y_AXIS)); //Acomodar verticalmente las cosas
@@ -191,11 +191,11 @@ public class VentanaPrincipal extends JFrame{
         panelPropiedades.add(crearPanelRutaMod());
         
         // Poner al lado uno del otro lo de numero de killsounds
-        panelNKillsounds.setLayout(new BoxLayout(panelNKillsounds, BoxLayout.X_AXIS));
-        panelNKillsounds.add(new JLabel("Numero de killsounds: "));
-        panelNKillsounds.add(new JLabel("0"));
+        //panelNKillsounds.setLayout(new BoxLayout(panelNKillsounds, BoxLayout.X_AXIS));
+        //panelNKillsounds.add(new JLabel("Numero de killsounds: "));
+        //panelNKillsounds.add(new JLabel("0"));
         
-        panelPropiedades.add(panelNKillsounds);
+        //SpanelPropiedades.add(panelNKillsounds);
         
         return panelPropiedades;
     }
@@ -288,6 +288,8 @@ public class VentanaPrincipal extends JFrame{
     private JButton crearBtnCambiarPropiedades(){
         btnCambiarPropiedades = new JButton("Cambiar Propiedades");
         
+        btnCambiarPropiedades.setVisible(false);
+        
         return btnCambiarPropiedades; 
     }
     
@@ -300,7 +302,7 @@ public class VentanaPrincipal extends JFrame{
         //ImageIcon iconBtnPathMod = new ImageIcon(getClass().getResource(ICONS_FOLDER+"icon_open_external.png"));
         
         //btnPathMod.setIcon(iconBtnPathMod); poner despues para cuando empieze a decorar
-        
+
         return btnPathMod;
     }
 }
