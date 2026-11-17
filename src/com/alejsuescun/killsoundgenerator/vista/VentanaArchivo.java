@@ -16,6 +16,7 @@ import javax.swing.*;
  */
 public class VentanaArchivo extends JDialog{
     JButton btnSelecArchivos, btnSelecFolder;
+    PanelArchivosSeleccionados panelArchivosSeleccionados;
     
     public VentanaArchivo(VentanaPrincipal ventanaPrincipal) {
         super(ventanaPrincipal, "Gestion de archivos", false);
@@ -59,6 +60,16 @@ public class VentanaArchivo extends JDialog{
     }
     
     /**
+     * Metodo para añadir un archivo al panel de archivos
+     * @param nombre String con el nombre
+     * @param ruta String con la ruta
+     * @param fecha String con la fecha
+     */
+    public void addArchivo(String nombre, String ruta, String fecha){
+        panelArchivosSeleccionados.addArchivo(nombre, ruta, fecha);
+    }
+    
+    /**
      * Crea el panel que tiene los dos botones de seleccionar por archivos y por carpeta
      * @return 
      */
@@ -93,6 +104,7 @@ public class VentanaArchivo extends JDialog{
      */
     private JPanel crearPanelArchivosSelecionados(){
         JPanel panel = new JPanel();
+        panelArchivosSeleccionados = new PanelArchivosSeleccionados();
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
@@ -104,7 +116,7 @@ public class VentanaArchivo extends JDialog{
         panel.add(new JLabel("Archivos Seleccionados"), gbc);
         gbc.gridy = 1;
         gbc.weighty = 10;
-        panel.add(new PanelArchivosSeleccionados(), gbc);
+        panel.add(panelArchivosSeleccionados, gbc);
         return panel;
     }
     

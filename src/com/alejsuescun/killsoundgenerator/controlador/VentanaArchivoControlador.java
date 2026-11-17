@@ -8,7 +8,9 @@ import com.alejsuescun.killsoundgenerator.modelo.ArchivosManager;
 import com.alejsuescun.killsoundgenerator.modelo.Killsound;
 import com.alejsuescun.killsoundgenerator.vista.VentanaArchivo;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Clase que controla los botones y cosas de la ventana de archivos
@@ -40,8 +42,12 @@ public class VentanaArchivoControlador {
         }
         
         verificarArchivos(filesSelect);
+        addArchivosGui();
     }
     
+    /**
+     * Funcion que se ejecuta cuando se presioan el boton de seleccionar por carpetas
+     */
     private void onBtnSelecFolder(){
         File[] filesSelect = ArchivosManager.pedirRutaChooserVariosArchivos(ventanaArchivo, true);
         
@@ -50,8 +56,13 @@ public class VentanaArchivoControlador {
         }
         
         verificarArchivos(filesSelect);
+        addArchivosGui();
     }
     
+    /**
+     * Metodo para añadir los archivos seleccionados por el usuario al array de killsounds
+     * @param archivos 
+     */
     private void verificarArchivos(File[] archivos){
         System.out.println("Verificando archivos si son killsounds...");
         for (File file : archivos) {
@@ -62,5 +73,14 @@ public class VentanaArchivoControlador {
                 System.err.println("    El archivo: \""+file.getAbsolutePath()+"\" no fue añadido");
             }
         }
+    }
+    
+    private void addArchivosGui(){
+        for (Killsound killsound : arrayKillsoundSelec) {
+            File archivo = killsound.getAudioFileOld();
+            Date fechaArchivo = new Date(archivo.lastModified());
+            ventanaArchivo.addArchivo(archivo.getName(), archivo.getAbsolutePath(), new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(fechaArchivo));
+        }
+        
     }
 }
