@@ -76,7 +76,14 @@ public class ModKillsoundMultiple extends Mod{
 
     @Override
     public boolean verificarSubCarpetas() {
-        throw new UnsupportedOperationException("Aun no programada :3");
+        String nombreMod = getNombreMod();
+        String rutaMod = getRutaMod();
+        String rutaBaseConcatenada = ArchivosManager.concatDosRutas(rutaMod, nombreMod);
+        String rutaSonido = ArchivosManager.concatDosRutas(rutaBaseConcatenada, NOMBRE_CARPETA_SOUND);
+        String rutaUI = ArchivosManager.concatDosRutas(rutaSonido, NOMBRE_CARPETA_SOUND_UI);
+        String rutaScripts = ArchivosManager.concatDosRutas(rutaBaseConcatenada, NOMBRE_CARPETA_SCRIPTS);
+        
+        return ArchivosManager.verificarCarpetas(rutaUI) && ArchivosManager.verificarCarpetas(rutaScripts);
     }
     
     /**
