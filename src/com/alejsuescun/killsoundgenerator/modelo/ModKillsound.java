@@ -76,7 +76,14 @@ public class ModKillsound extends Mod{
 
     @Override
     public void moverArchivos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String nombreMod = getNombreMod();
+        String rutaMod = getRutaMod();
+        String rutaBaseConcatenada = ArchivosManager.concatDosRutas(rutaMod, nombreMod);
+        String rutaSonido = ArchivosManager.concatDosRutas(rutaBaseConcatenada, NOMBRE_CARPETA_SOUND);
+        String rutaUI = ArchivosManager.concatDosRutas(rutaSonido, NOMBRE_CARPETA_SOUND_UI);
+        String rutaNueva = ArchivosManager.concatDosRutas(rutaUI, NOMBRE_ARCHIVO+".wav");
+        System.out.println("Copiando archivo...");
+        ArchivosManager.copiarYpegarArchivo(killsound.getAudioFileOld().getAbsolutePath(), rutaNueva);
     }
     
     

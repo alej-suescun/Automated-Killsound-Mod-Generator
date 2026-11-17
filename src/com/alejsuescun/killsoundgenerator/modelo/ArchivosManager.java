@@ -243,15 +243,15 @@ public class ArchivosManager {
      * @param pathArchivoNew String de hacia donde mover el archivo
      */
     public static void copiarYpegarArchivo(String pathArchivoOld, String pathArchivoNew){
-        System.out.println("Copiando el archivo \""+pathArchivoOld+"\" en \""+pathArchivoNew+"\"");
+        System.out.println("    Copiando el archivo \""+pathArchivoOld+"\" en \""+pathArchivoNew+"\"");
         try {
             Path sourceFile  = Paths.get(pathArchivoOld);
             Path targetFile  = Paths.get(pathArchivoNew);
             
             Files.copy(sourceFile, targetFile, StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("Se copio el archivo \""+pathArchivoOld+"\" en \""+pathArchivoNew+"\"");
+            System.out.println("        Se copio el archivo \""+pathArchivoOld+"\" en \""+pathArchivoNew+"\"");
         } catch (IOException ex) {
-            System.err.println("No se pudo copiar archivo \""+pathArchivoOld+"\" en \""+pathArchivoNew+"\"");
+            System.err.println("    No se pudo copiar archivo \""+pathArchivoOld+"\" en \""+pathArchivoNew+"\"");
         }
 
     }

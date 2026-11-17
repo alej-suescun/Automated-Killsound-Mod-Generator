@@ -100,7 +100,24 @@ public class ModKillsoundMultiple extends Mod{
 
     @Override
     public void moverArchivos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String nombreMod = getNombreMod();
+        String rutaMod = getRutaMod();
+        String rutaBaseConcatenada = ArchivosManager.concatDosRutas(rutaMod, nombreMod);
+        String rutaSonido = ArchivosManager.concatDosRutas(rutaBaseConcatenada, NOMBRE_CARPETA_SOUND);
+        String rutaUI = ArchivosManager.concatDosRutas(rutaSonido, NOMBRE_CARPETA_SOUND_UI);
+        String rutaNueva = ArchivosManager.concatDosRutas(rutaUI, NOMBRE_ARCHIVO+".wav");
+        ArrayList<Killsound> arrayKillsoundsFix = (ArrayList<Killsound>) arrayKillsounds.clone();
+        arrayKillsoundsFix.removeFirst();
+        
+        System.out.println("Copiando archivos...");
+        ArchivosManager.copiarYpegarArchivo(arrayKillsounds.getFirst().getAudioFileOld().getAbsolutePath(), rutaNueva);
+        
+        int nkillsound = 2; // Incia siempre desde el 2 no 1
+        for (Killsound killsound : arrayKillsoundsFix) {
+            String rutaKillsound = ArchivosManager.concatDosRutas(rutaUI, NOMBRE_ARCHIVO+nkillsound+".wav");
+            ArchivosManager.copiarYpegarArchivo(killsound.getAudioFileOld().getAbsolutePath(), rutaKillsound);
+            nkillsound++;
+        }
     }
     
     
