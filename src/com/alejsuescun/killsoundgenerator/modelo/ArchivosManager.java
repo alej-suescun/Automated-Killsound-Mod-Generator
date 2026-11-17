@@ -287,6 +287,6 @@ public class ArchivosManager {
      * @return booleano true si esta bien
      */
     public static boolean isGoodStringForFile(String str){
-        return (!str.isBlank() || str.matches(".*[/\\|:*?\"<>].*"));
+        return (!str.isBlank() && !str.matches(".*[/\\\\|:*?\"<>].*"));
     }
 }
