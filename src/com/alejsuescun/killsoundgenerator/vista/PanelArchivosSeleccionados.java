@@ -20,7 +20,7 @@ import javax.swing.*;
  */
 public class PanelArchivosSeleccionados extends JPanel{
     public static final String[] NOMBRES_TIPOS_ORGANIZAR = {"Nombre", "Fecha"};
-    private JButton btnBorrarArchivos;
+    private JButton btnBorrarArchivos, btnSelecTodo;
     private JComboBox<String> btnComboOrganizar;
     private JPanel panelArchivos;
     
@@ -46,6 +46,14 @@ public class PanelArchivosSeleccionados extends JPanel{
     }
     
     /**
+     * Metodo para agregar un action listener al boton de seleccionar todo
+     * @param l 
+     */
+    public void setBtnSelecTodoListener(ActionListener l) {
+        btnSelecTodo.addActionListener(l);
+    }
+    
+    /**
      * Metodo para agregar un action listener al boton de borrar archivos
      * @param l 
      */
@@ -60,6 +68,8 @@ public class PanelArchivosSeleccionados extends JPanel{
     public void setBtnComboOrganizarListener(ActionListener l){
         btnComboOrganizar.addActionListener(l);
     }
+    
+
     
     /**
      * Metodo para añadir un archivo al panel de archivos
@@ -133,14 +143,18 @@ public class PanelArchivosSeleccionados extends JPanel{
         gbc.insets = new Insets(4, 8, 4, 8); // Padding (t, l, d, r)
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weightx = 2;
+        gbc.weightx = 3;
         gbc.weighty = 1;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;        
         panel.add(crearSubPanelOrganizarArchivos(), gbc);
         
-        gbc.gridx = 2;
+        gbc.gridx = 1;
         gbc.weightx = 1;
         gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+        panel.add(crearBtnSelecTodo(), gbc);
+        
+        gbc.gridx = 2;
+        gbc.weightx = 1;
         panel.add(crearBtnBorrarArchivos(), gbc);
         
         return panel;
@@ -194,6 +208,15 @@ public class PanelArchivosSeleccionados extends JPanel{
      */
     private JButton crearBtnBorrarArchivos(){
         btnBorrarArchivos = new JButton("Borrar");
+        return btnBorrarArchivos;
+    }
+    
+    /**
+     * Configura el boton de seleccionar todo
+     * @return 
+     */
+    private JButton crearBtnSelecTodo(){
+        btnBorrarArchivos = new JButton("Seleccionar todo");
         return btnBorrarArchivos;
     }
     
