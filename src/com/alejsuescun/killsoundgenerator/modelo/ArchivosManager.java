@@ -80,7 +80,7 @@ public class ArchivosManager {
         }
         
         String[] nombreCarpetasArrayCorregido = new String[nombreCarpetasArray.length];
-        for (int i = 0; i < nombreCarpetasArray.length-1; i++) {
+        for (int i = 0; i < nombreCarpetasArray.length; i++) {
             String nombreCarpeta = nombreCarpetasArray[i];
             if (isGoodStringForFile(nombreCarpeta)) {
                 nombreCarpetasArrayCorregido[i] = nombreCarpeta;
@@ -108,7 +108,7 @@ public class ArchivosManager {
     public static void crearCarpetas(String PathBase, String nombreCarpeta) throws IllegalArgumentException, FileNotFoundException{
         String[] nombreCarpetasArray = new String[1];
         
-        if (!isGoodStringForFile(PathBase)) {
+        if (!isGoodStringForFile(nombreCarpeta)) {
             System.err.println("El nombre \""+nombreCarpeta+"\" no es valido para una carpeta!");
             throw new IllegalArgumentException("El string no es valido para una carpeta");
         }
