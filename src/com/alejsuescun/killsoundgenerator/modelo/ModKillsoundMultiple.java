@@ -52,6 +52,12 @@ public class ModKillsoundMultiple extends Mod{
         this.arrayKillsounds = arrayKillsounds;
     }
     
+    /**
+     * Metodo que crea la subCarpetas del mod,
+     * crea: .../nombreMod/sound/ui, .../nombremod/scripts
+     * 
+     * Se sigue de acuerdo a lo que dice la <a href="https://wiki.teamfortress.com/wiki/Hit_Sound#Custom_Hit_Sounds">wiki de team fortress 2</a>
+     */
     @Override
     public void crearSubCarpetas() {
         if (!verificarCarpeta()) {
@@ -73,7 +79,13 @@ public class ModKillsoundMultiple extends Mod{
             System.err.println("    Por favor seleccione otra diferente!");
         }
     }
-
+    
+    /**
+     * Metodo para verficar que existan las subcarpetas
+     * ../sound/ui
+     * ../scripts/
+     * @return booleano true si existen
+     */
     @Override
     public boolean verificarSubCarpetas() {
         String nombreMod = getNombreMod();
