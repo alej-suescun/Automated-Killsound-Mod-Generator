@@ -65,6 +65,8 @@ public class VentanaPrincipalControlador {
         String nombre = ventanaPrincipal.getTxtNombreMod();
         String pathMod = ventanaPrincipal.getTxtPathMod();
         ArrayList<Killsound> arrayKillsounds;
+        Mod mod;
+        
         if (!ArchivosManager.isGoodStringForFile(nombre)) {
             JOptionPane.showMessageDialog(ventanaPrincipal, 
                     "El nombre no puede estar vacio ni tener los siguientes caracteres: .*[/\\\\|:*?\\\"<>].*", 
@@ -112,8 +114,15 @@ public class VentanaPrincipalControlador {
             System.err.println("No se pudo crear el mod!");
             return;
         }
-        System.out.println("El mod tendra "+arrayKillsounds.size()+" killsounds");
+        int cantKillsounds = arrayKillsounds.size();
         
+        if (cantKillsounds == 1) {
+            mod = new ModKillsound(arrayKillsounds.get(0), nombre, pathMod);
+            System.out.println("El mod tendra "+cantKillsounds+" killsound");
+        } else {
+            mod = new ModKillsoundMultiple(arrayKillsounds, nombre, pathMod);
+            System.out.println("El mod tendra "+cantKillsounds+" killsounds");
+        }
         
     }
 
