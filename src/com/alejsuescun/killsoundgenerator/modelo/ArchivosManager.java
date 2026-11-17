@@ -248,6 +248,39 @@ public class ArchivosManager {
     }
     
     /**
+     * Comparar dos strings para poder ordenarlos alfabeticamente incluyendo los numeros
+     * @param a String 1
+     * @param b String 2
+     * @return entero, negativo si a va antes q b, 0 si son equivalente o
+     * positivo si a va despues de b
+     */
+    public static int compararNatural(String a, String b) {
+        int i = 0, j = 0;
+        while (i < a.length() && j < b.length()) {
+            char ca = a.charAt(i);
+            char cb = b.charAt(j);
+
+            if (Character.isDigit(ca) && Character.isDigit(cb)) {
+                int inicioA = i, inicioB = j;
+                while (i < a.length() && Character.isDigit(a.charAt(i))) i++;
+                while (j < b.length() && Character.isDigit(b.charAt(j))) j++;
+
+                java.math.BigInteger na = new java.math.BigInteger(a.substring(inicioA, i));
+                java.math.BigInteger nb = new java.math.BigInteger(b.substring(inicioB, j));
+                int cmp = na.compareTo(nb);
+                if (cmp != 0) return cmp;
+            } else {
+                int cmp = Character.compare(Character.toLowerCase(ca), Character.toLowerCase(cb));
+                if (cmp != 0) return cmp;
+                i++;
+                j++;
+            }
+        }
+        return Integer.compare(a.length() - i, b.length() - j);
+    }
+    
+    
+    /**
      * Metodo para verificar si es string es valido para el titulo de un archivo
      * revisando que no tenga ninguno de los siguientes caracteres: /\|:*?"<>
      * @param str El string
