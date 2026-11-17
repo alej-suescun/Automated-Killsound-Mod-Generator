@@ -15,7 +15,7 @@ public class ModKillsound extends Mod{
     
     public ModKillsound(Killsound killsound,String nombreMod, String rutaMod) throws IllegalArgumentException {
         super(nombreMod, rutaMod);
-        if (isGoodKillsound(killsound)) {
+        if (!isGoodKillsound(killsound)) {
             throw new IllegalArgumentException("El killsound no puede ser null!");
         }
         this.killsound = killsound;
