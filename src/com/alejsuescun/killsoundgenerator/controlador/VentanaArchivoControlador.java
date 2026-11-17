@@ -28,6 +28,9 @@ public class VentanaArchivoControlador {
     private void init(){
         ventanaArchivo.setBtnSelecArchivosListener((e) -> {onBtnSelecArchivos();});
         ventanaArchivo.setBtnSelecFolderListener((e) -> {onBtnSelecFolder();});
+        ventanaArchivo.setBtnComboOrganizarListener((e) -> {onBtnComboOrganizar();});
+        ventanaArchivo.setBtnSelectTodoListener((e) -> {onBtnSelectTodo();});
+        ventanaArchivo.setBtnBorrarListener((e) -> {onBtnBorrar();});
     }
     
     
@@ -58,7 +61,28 @@ public class VentanaArchivoControlador {
         verificarArchivos(filesSelect);
         addArchivosGui();
     }
-        
+    
+    /**
+     * Funcion que se ejecuta cuando se presiona el boton desplegable
+     */
+    private void onBtnComboOrganizar(){
+        System.out.println("Aun no implementado >:3");
+    }
+    
+    /**
+     * Funcion que se ejecuta cuando se presiona el boton de seleccionar todo
+     */
+    private void onBtnSelectTodo(){
+        System.out.println("Aun no implementado >:3");
+    }
+    
+    /**
+     * Funcion que se ejecuta cuando se presiona el boton de borrar
+     */
+    private void onBtnBorrar(){
+        System.out.println("Aun no implementado >:3");
+    }
+    
     /**
      * Metodo para añadir los archivos seleccionados por el usuario al array de killsounds
      * @param archivos 
@@ -69,7 +93,6 @@ public class VentanaArchivoControlador {
             
             try {
                 boolean existe = false;
-
 
                 for (Killsound killsound : arrayKillsoundSelec) {
                     if (killsound.getAudioFileOld().getAbsolutePath().equals(file.getAbsolutePath())) {
