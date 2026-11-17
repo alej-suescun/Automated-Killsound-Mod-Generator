@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Stream;
 import javax.swing.JFileChooser;
 
 /**
@@ -178,7 +180,7 @@ public class ArchivosManager {
     public static File[] pedirRutaChooserVariosArchivos(Component parent){
         File[] ruta = null;
         JFileChooser chooser = new JFileChooser();
-        chooser.setMultiSelectionEnabled(true); //Solo seleccionar carpeta
+        chooser.setMultiSelectionEnabled(true); //Seleccionar varios archivos
         
         int op = chooser.showDialog(parent, "Seleccionar");
         
@@ -187,6 +189,45 @@ public class ArchivosManager {
             System.out.println("Archivos seleccionados: ");
             for (File file : ruta) {
                 System.out.println("    \""+file.getAbsolutePath()+"\"");
+            }
+        } else {
+            System.out.println("No se selecciono ningun archivo");
+        }
+        
+        return ruta;
+    }
+    
+    /**
+     * Metodo para abrir el selector de archivos de java
+     * @param parent JFrame para que se pegue el JFileCHooser (VentanaPrincipal)
+     * @param carpeta
+     * @return String con la ruta seleccionada por el usuario
+     */
+    public static File[] pedirRutaChooserVariosArchivos(Component parent, boolean carpeta){
+        if (!carpeta) {
+            return pedirRutaChooserVariosArchivos(parent);
+        }
+        File[] ruta = null;
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); //Solo seleccionar carpeta
+        
+        int op = chooser.showDialog(parent, "Seleccionar");
+        
+        if (op == JFileChooser.APPROVE_OPTION) {
+            File carpetaSelec = chooser.getSelectedFile();
+            System.out.println("Carpeta seleccionada \""+carpetaSelec.getAbsolutePath()+"\"");
+            // miramos la carpeta con Files.walk (Java 8 para en adelante)
+            // lo use pq era mas moderno
+            ArrayList<File> arrayList = new ArrayList<>(1);
+
+            try (Stream<Path> stream = Files.walk(carpetaSelec.toPath())) {
+                stream.filter(Files::isRegularFile).map(Path::toFile).forEach(file -> {
+                    System.out.println("    Archivo encontrado \""+file.getAbsolutePath()+"\"");
+                    arrayList.add(file);
+            });
+            ruta = arrayList.toArray(File[]::new);
+            } catch (IOException e) {
+                System.out.println("Sucedio un error mientras se miraban los archivos de la carpeta");
             }
         } else {
             System.out.println("No se selecciono ningun archivo");
