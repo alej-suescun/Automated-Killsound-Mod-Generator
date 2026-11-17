@@ -66,9 +66,25 @@ public class VentanaArchivoControlador {
     private void verificarArchivos(File[] archivos){
         System.out.println("Verificando archivos si son killsounds...");
         for (File file : archivos) {
+            
             try {
-                arrayKillsoundSelec.add(new Killsound(file));
-                System.out.println("    El archivo: \""+file.getAbsolutePath()+"\" fue añadido");
+                boolean existe = false;
+
+                
+                for (Killsound killsound : arrayKillsoundSelec) {
+                    if (killsound.getAudioFileOld().getAbsolutePath().equals(file.getAbsolutePath())) {
+                        existe = true;
+                        break;
+                    }
+                }
+                
+                if (existe) {
+                    continue;
+                }
+                
+                Killsound killsound = new Killsound(file);
+                arrayKillsoundSelec.add(killsound);
+                System.err.println("    El archivo: \""+file.getAbsolutePath()+"\" fue añadido");
             } catch (Exception e) {
                 System.err.println("    El archivo: \""+file.getAbsolutePath()+"\" no fue añadido");
             }
@@ -76,6 +92,9 @@ public class VentanaArchivoControlador {
     }
     
     private void addArchivosGui(){
+        if (arrayKillsoundSelec.isEmpty()) {
+            return;
+        }
         for (Killsound killsound : arrayKillsoundSelec) {
             File archivo = killsound.getAudioFileOld();
             Date fechaArchivo = new Date(archivo.lastModified());
