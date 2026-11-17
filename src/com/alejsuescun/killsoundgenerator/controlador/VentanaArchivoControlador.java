@@ -4,7 +4,11 @@
  */
 package com.alejsuescun.killsoundgenerator.controlador;
 
+import com.alejsuescun.killsoundgenerator.modelo.ArchivosManager;
+import com.alejsuescun.killsoundgenerator.modelo.Killsound;
 import com.alejsuescun.killsoundgenerator.vista.VentanaArchivo;
+import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Clase que controla los botones y cosas de la ventana de archivos
@@ -12,7 +16,8 @@ import com.alejsuescun.killsoundgenerator.vista.VentanaArchivo;
  */
 public class VentanaArchivoControlador {
     private final VentanaArchivo ventanaArchivo;
-
+    private ArrayList<Killsound> arrayKillsoundSelec = new ArrayList<>(1);
+    
     public VentanaArchivoControlador(VentanaArchivo ventanaArchivo) {
         this.ventanaArchivo = ventanaArchivo;
         init();
@@ -25,10 +30,23 @@ public class VentanaArchivoControlador {
     
     
     /**
-     * Funcion que se ejecuta cuanod se presiona el boton de seleccionar archivos
+     * Funcion que se ejecuta cuando se presiona el boton de seleccionar archivos
      */
     private void onBtnSelecArchivos(){
-        System.out.println("Aun no implementado >:3");
+        File[] filesSelect = ArchivosManager.pedirRutaChooserVariosArchivos(ventanaArchivo);
+        
+        if (filesSelect == null) {
+            return;
+        }
+        
+        System.out.println("Verificando archivos si son killsounds...");
+        for (File file : filesSelect) {
+            try {
+                arrayKillsoundSelec.add(new Killsound(file));
+            } catch (Exception e) {
+                System.err.println("    El archivo: \""+file.getAbsolutePath()+"\" no fue añadido");
+            }
+        }
     }
     
     private void onBtnSelecFolder(){
