@@ -58,7 +58,7 @@ public class VentanaArchivoControlador {
         verificarArchivos(filesSelect);
         addArchivosGui();
     }
-    
+        
     /**
      * Metodo para añadir los archivos seleccionados por el usuario al array de killsounds
      * @param archivos 
@@ -70,7 +70,7 @@ public class VentanaArchivoControlador {
             try {
                 boolean existe = false;
 
-                
+
                 for (Killsound killsound : arrayKillsoundSelec) {
                     if (killsound.getAudioFileOld().getAbsolutePath().equals(file.getAbsolutePath())) {
                         existe = true;
@@ -91,15 +91,24 @@ public class VentanaArchivoControlador {
         }
     }
     
+    /**
+     * Añade los archivos a la gui ordenando por nombre ()
+     */
     private void addArchivosGui(){
         if (arrayKillsoundSelec.isEmpty()) {
             return;
         }
+        
+        arrayKillsoundSelec.sort((o1, o2) -> {
+            return ArchivosManager.compararNatural(o1.getAudioFileOld().getName(), o2.getAudioFileOld().getName());
+        });
+        ventanaArchivo.borrarArchivos();
         for (Killsound killsound : arrayKillsoundSelec) {
             File archivo = killsound.getAudioFileOld();
             Date fechaArchivo = new Date(archivo.lastModified());
             ventanaArchivo.addArchivo(archivo.getName(), archivo.getAbsolutePath(), new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(fechaArchivo));
-        }
-        
+        }   
     }
+    
+    
 }
