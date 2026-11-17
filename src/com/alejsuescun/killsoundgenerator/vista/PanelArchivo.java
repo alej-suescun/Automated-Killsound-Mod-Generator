@@ -64,6 +64,10 @@ public class PanelArchivo extends JPanel {
         return labelFecha.getText();
     }
     
+    public boolean getStatus(){
+        return btnCheckSelec.isSelected();
+    }
+    
     /**
      * Metodo para poner el nombre del archivo en el label
      * @param nombre String
