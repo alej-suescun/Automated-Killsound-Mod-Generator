@@ -74,7 +74,10 @@ public class VentanaArchivoControlador {
      * Funcion que se ejecuta cuando se presiona el boton de seleccionar todo
      */
     private void onBtnSelectTodo(){
-        System.out.println("Aun no implementado >:3");
+        ArrayList<PanelArchivo> archivos = ventanaArchivo.getArchivos();
+        for (PanelArchivo archivo : archivos) {
+            archivo.setStatus(true);
+        }
     }
     
     /**
@@ -126,6 +129,7 @@ public class VentanaArchivoControlador {
      */
     private void addArchivosGui(){
         if (arrayKillsoundSelec.isEmpty()) {
+            ventanaArchivo.borrarArchivos();
             return;
         }
         
