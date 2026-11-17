@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -236,6 +237,24 @@ public class ArchivosManager {
         return ruta;
     }
     
+    /**
+     * Metodo para copiar y pegar archivos
+     * @param pathArchivoOld String de donde esta el archivo
+     * @param pathArchivoNew String de hacia donde mover el archivo
+     */
+    public static void copiarYpegarArchivo(String pathArchivoOld, String pathArchivoNew){
+        System.out.println("Copiando el archivo \""+pathArchivoOld+"\" en \""+pathArchivoNew+"\"");
+        try {
+            Path sourceFile  = Paths.get(pathArchivoOld);
+            Path targetFile  = Paths.get(pathArchivoNew);
+            
+            Files.copy(sourceFile, targetFile, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Se copio el archivo \""+pathArchivoOld+"\" en \""+pathArchivoNew+"\"");
+        } catch (IOException ex) {
+            System.err.println("No se pudo copiar archivo \""+pathArchivoOld+"\" en \""+pathArchivoNew+"\"");
+        }
+
+    }
     
     /**
      * Metodo que concatena dos rutas sin importar el sistema operativo
