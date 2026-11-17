@@ -8,6 +8,7 @@ import com.alejsuescun.killsoundgenerator.modelo.*;
 import com.alejsuescun.killsoundgenerator.vista.*;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -19,6 +20,7 @@ public class VentanaPrincipalControlador {
     private final VentanaPrincipal ventanaPrincipal;
     private VentanaArchivo ventanaArchivo;
     private VentanaPropiedades ventanaPropiedades;
+    private VentanaArchivoControlador ventanaArchivoControlador;
     
     public VentanaPrincipalControlador(VentanaPrincipal ventanaPrincipal) {
         this.ventanaPrincipal = ventanaPrincipal;
@@ -62,6 +64,7 @@ public class VentanaPrincipalControlador {
     private void onBtnCrearMod(){
         String nombre = ventanaPrincipal.getTxtNombreMod();
         String pathMod = ventanaPrincipal.getTxtPathMod();
+        ArrayList<Killsound> arrayKillsounds;
         if (!ArchivosManager.isGoodStringForFile(nombre)) {
             JOptionPane.showMessageDialog(ventanaPrincipal, 
                     "El nombre no puede estar vacio ni tener los siguientes caracteres: .*[/\\\\|:*?\\\"<>].*", 
@@ -85,8 +88,32 @@ public class VentanaPrincipalControlador {
             System.err.println("No se pudo crear el mod!");
             return;
         }
-        
+
         System.out.println("El mod se guardara en: \""+pathMod+"\"");
+        
+        if (ventanaArchivoControlador == null) {
+            JOptionPane.showMessageDialog(ventanaPrincipal, """
+                                                            No se ha seleccionado ningun archivo!
+                                                            Selecciona archivos en gestionar archivos
+                                                            """, 
+                    "No se pudo crear el mod",JOptionPane.ERROR_MESSAGE);
+            System.err.println("No se pudo crear el mod!");
+            return;
+        }
+        
+        arrayKillsounds = ventanaArchivoControlador.getArrayKillsounds();
+        
+        if (arrayKillsounds.isEmpty()) {
+            JOptionPane.showMessageDialog(ventanaPrincipal, """
+                                                            No se ha seleccionado ningun archivo!
+                                                            Selecciona archivos en gestionar archivos
+                                                            """, 
+                    "No se pudo crear el mod",JOptionPane.ERROR_MESSAGE);
+            System.err.println("No se pudo crear el mod!");
+            return;
+        }
+        System.out.println("El mod tendra "+arrayKillsounds.size()+" killsounds");
+        
         
     }
 
@@ -103,7 +130,7 @@ public class VentanaPrincipalControlador {
             }
             
             ventanaArchivo = new VentanaArchivo(ventanaPrincipal);
-            VentanaArchivoControlador ventanaArchivoControlador = new VentanaArchivoControlador(ventanaArchivo);
+            ventanaArchivoControlador = new VentanaArchivoControlador(ventanaArchivo);
         });
     }
     
