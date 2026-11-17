@@ -216,8 +216,8 @@ public class PanelArchivosSeleccionados extends JPanel{
      * @return 
      */
     private JButton crearBtnSelecTodo(){
-        btnBorrarArchivos = new JButton("Seleccionar todo");
-        return btnBorrarArchivos;
+        btnSelecTodo = new JButton("Seleccionar todo");
+        return btnSelecTodo;
     }
     
     /**
