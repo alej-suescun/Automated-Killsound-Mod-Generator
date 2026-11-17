@@ -39,8 +39,22 @@ public class VentanaArchivoControlador {
             return;
         }
         
+        verificarArchivos(filesSelect);
+    }
+    
+    private void onBtnSelecFolder(){
+        File[] filesSelect = ArchivosManager.pedirRutaChooserVariosArchivos(ventanaArchivo, true);
+        
+        if (filesSelect == null) {
+            return;
+        }
+        
+        verificarArchivos(filesSelect);
+    }
+    
+    private void verificarArchivos(File[] archivos){
         System.out.println("Verificando archivos si son killsounds...");
-        for (File file : filesSelect) {
+        for (File file : archivos) {
             try {
                 arrayKillsoundSelec.add(new Killsound(file));
                 System.out.println("    El archivo: \""+file.getAbsolutePath()+"\" fue añadido");
@@ -48,9 +62,5 @@ public class VentanaArchivoControlador {
                 System.err.println("    El archivo: \""+file.getAbsolutePath()+"\" no fue añadido");
             }
         }
-    }
-    
-    private void onBtnSelecFolder(){
-        System.out.println("Aun no implementado >:3");
     }
 }
