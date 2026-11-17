@@ -97,6 +97,13 @@ public class ModKillsoundMultiple extends Mod{
         
         return ArchivosManager.verificarCarpetas(rutaUI) && ArchivosManager.verificarCarpetas(rutaScripts);
     }
+
+    @Override
+    public void moverArchivos() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    
     
     /**
      * Metodo para verificar si un array killsounds esta bien 

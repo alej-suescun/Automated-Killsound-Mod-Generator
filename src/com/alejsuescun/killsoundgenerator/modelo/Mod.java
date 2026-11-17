@@ -110,4 +110,6 @@ public abstract class Mod {
     public abstract void crearSubCarpetas();
     
     public abstract boolean verificarSubCarpetas();
+    
+    public abstract void moverArchivos();
 }

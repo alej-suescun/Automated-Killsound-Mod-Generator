@@ -73,6 +73,13 @@ public class ModKillsound extends Mod{
         
         return ArchivosManager.verificarCarpetas(rutaUI);
     }
+
+    @Override
+    public void moverArchivos() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    
     
     /**
      * Metodo para mirar si el killsound esta bien
