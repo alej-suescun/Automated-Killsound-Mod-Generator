@@ -6,6 +6,7 @@ package com.alejsuescun.killsoundgenerator.controlador;
 
 import com.alejsuescun.killsoundgenerator.modelo.ArchivosManager;
 import com.alejsuescun.killsoundgenerator.modelo.Killsound;
+import com.alejsuescun.killsoundgenerator.vista.PanelArchivo;
 import com.alejsuescun.killsoundgenerator.vista.VentanaArchivo;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -80,7 +81,13 @@ public class VentanaArchivoControlador {
      * Funcion que se ejecuta cuando se presiona el boton de borrar
      */
     private void onBtnBorrar(){
-        System.out.println("Aun no implementado >:3");
+        ArrayList<PanelArchivo> archivos = ventanaArchivo.getArchivos();
+        for (PanelArchivo archivo : archivos) {
+            if (archivo.getStatus()) {
+                borrarKillsound(archivo.getRuta());
+            }           
+        }
+        addArchivosGui();
     }
     
     /**
@@ -115,7 +122,7 @@ public class VentanaArchivoControlador {
     }
     
     /**
-     * Añade los archivos a la gui ordenando por nombre ()
+     * Añade los archivos a la gui ordenando por nombre y borrando todo antes
      */
     private void addArchivosGui(){
         if (arrayKillsoundSelec.isEmpty()) {
@@ -133,5 +140,21 @@ public class VentanaArchivoControlador {
         }   
     }
     
+    /**
+     * borrar un killsound del array desde un string de path
+     * @param path 
+     */
+    private void borrarKillsound(String path){
+        Killsound killsoundBorrar = null;
+        for (Killsound killsound : arrayKillsoundSelec) {
+            if (killsound.getAudioFileOld().getAbsolutePath().equals(path)) {
+                killsoundBorrar = killsound;
+            }
+        }
+        if (killsoundBorrar != null) {
+            arrayKillsoundSelec.remove(killsoundBorrar);
+            System.out.println("Se borro el killsound: \""+killsoundBorrar.getAudioFileOld().getAbsolutePath()+"\"");
+        } 
+    }
     
 }
