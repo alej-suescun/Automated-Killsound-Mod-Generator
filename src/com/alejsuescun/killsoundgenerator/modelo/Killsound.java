@@ -69,6 +69,7 @@ public class Killsound {
      */
     public static boolean validWav(File file){
         String path = file.getAbsolutePath();
+        System.out.println("    Verificando archivo: \""+path+"\"");
         try {
             AudioFileFormat fileFormat = AudioSystem.getAudioFileFormat(file);
             AudioFormat formato = fileFormat.getFormat();
@@ -82,22 +83,22 @@ public class Killsound {
                     //System.out.println("Se añadio: "+path);
                     return true;
                 } else {
-                    System.out.println("El archivo: "+path+" esta mal configurado para TF2!");
-                    System.out.println("Frecuencia de muestreo: "+sampleRate+" (Correcta: 44100)");
-                    System.out.println("Profundidad de bits "+bithDepth+" (Correcta: 16)");
-                    System.out.println("Por favor cambie las propiedades del archivo");
+                    System.out.println("        El archivo: \""+path+"\" esta mal configurado para TF2!");
+                    System.out.println("        Frecuencia de muestreo: \""+sampleRate+"\" (Correcta: 44100)");
+                    System.out.println("        Profundidad de bits \""+bithDepth+"\" (Correcta: 16)");
+                    System.out.println("        Por favor cambie las propiedades del archivo");
                     return false;
                 }
  
             } else {
-                System.err.println("El archivo: "+path+" no es un wav!");
+                System.err.println("        El archivo: \""+path+"\" no es un wav!");
                 return false;
             }
         } catch (UnsupportedAudioFileException e) {
-            System.err.println("El archivo: "+path+" no es un wav!");
+            System.err.println("        El archivo: \""+path+"\" no es un wav!");
             return false;
         } catch (IOException e){
-            System.err.println("Sucedio un error!");
+            System.err.println("        Sucedio un error inesperado a la hora de analizar: \""+path+"\"");
             return false;
         }
     }
