@@ -6,6 +6,7 @@ package com.alejsuescun.killsoundgenerator.vista;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -41,7 +42,7 @@ public class PanelArchivosSeleccionados extends JPanel{
         gbc.gridy = 1;
         gbc.weightx = 1;
         gbc.weighty = 10;
-        add(crearPanelArchivos(), gbc);
+        add(crearScrollPanelArchivos(), gbc);
     }
     
     /**
@@ -68,8 +69,10 @@ public class PanelArchivosSeleccionados extends JPanel{
      */
     public void addArchivo(String nombre, String ruta, String fecha){
         panelArchivos.add(new PanelArchivo(nombre, ruta, fecha));
+        panelArchivos.revalidate();
+        panelArchivos.repaint();
     }
-    
+     
     /**
      * Retorna una arrayList con todos los archivos que estan en la GUI
      * @return arraylist con los PanelArchivo, si no hay ninguno null
@@ -147,6 +150,14 @@ public class PanelArchivosSeleccionados extends JPanel{
         panelArchivos.setLayout(new BoxLayout(panelArchivos, BoxLayout.Y_AXIS));
         
         return panelArchivos;
+    }
+    
+    private JScrollPane crearScrollPanelArchivos(){
+        JScrollPane pane = new JScrollPane(crearPanelArchivos());
+        pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        pane.setPreferredSize(new Dimension(400, 300));
+        return pane;
     }
     
     /**
