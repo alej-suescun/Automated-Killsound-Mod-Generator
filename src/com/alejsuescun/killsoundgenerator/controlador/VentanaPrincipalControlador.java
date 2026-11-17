@@ -124,6 +124,8 @@ public class VentanaPrincipalControlador {
             System.out.println("El mod tendra "+cantKillsounds+" killsounds");
         }
         
+        mod.crearCarpeta();
+        mod.crearSubCarpetas();
     }
 
     /**
