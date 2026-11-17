@@ -43,6 +43,7 @@ public class VentanaArchivoControlador {
         for (File file : filesSelect) {
             try {
                 arrayKillsoundSelec.add(new Killsound(file));
+                System.out.println("    El archivo: \""+file.getAbsolutePath()+"\" fue añadido");
             } catch (Exception e) {
                 System.err.println("    El archivo: \""+file.getAbsolutePath()+"\" no fue añadido");
             }
