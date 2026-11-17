@@ -34,6 +34,9 @@ public class VentanaArchivoControlador {
         ventanaArchivo.setBtnBorrarListener((e) -> {onBtnBorrar();});
     }
     
+    public ArrayList<Killsound> getArrayKillsounds(){
+        return arrayKillsoundSelec;
+    }
     
     /**
      * Funcion que se ejecuta cuando se presiona el boton de seleccionar archivos
