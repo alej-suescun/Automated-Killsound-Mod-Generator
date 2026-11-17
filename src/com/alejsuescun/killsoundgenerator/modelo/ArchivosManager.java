@@ -171,6 +171,32 @@ public class ArchivosManager {
     }
     
     /**
+     * Metodo para abrir el selector de archivos de java
+     * @param parent JFrame para que se pegue el JFileCHooser (VentanaPrincipal)
+     * @return String con la ruta seleccionada por el usuario
+     */
+    public static File[] pedirRutaChooserVariosArchivos(Component parent){
+        File[] ruta = null;
+        JFileChooser chooser = new JFileChooser();
+        chooser.setMultiSelectionEnabled(true); //Solo seleccionar carpeta
+        
+        int op = chooser.showDialog(parent, "Seleccionar");
+        
+        if (op == JFileChooser.APPROVE_OPTION) {
+            ruta = chooser.getSelectedFiles();
+            System.out.println("Archivos seleccionados: ");
+            for (File file : ruta) {
+                System.out.println("    \""+file.getAbsolutePath()+"\"");
+            }
+        } else {
+            System.out.println("No se selecciono ningun archivo");
+        }
+        
+        return ruta;
+    }
+    
+    
+    /**
      * Metodo que concatena dos rutas sin importar el sistema operativo
      * @param ruta1 String con la primera parte de la ruta
      * @param ruta2 String con la segunda parte de la ruta
