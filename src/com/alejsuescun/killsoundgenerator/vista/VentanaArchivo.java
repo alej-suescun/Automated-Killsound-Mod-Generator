@@ -161,7 +161,7 @@ public class VentanaArchivo extends JDialog{
      * @return 
      */
     private JButton crearBtnSelecArchivos(){
-        btnSelecArchivos = new JButton("Seleccionar más");
+        btnSelecArchivos = new JButton("Seleccionar por archivo");
         
         return btnSelecArchivos;
     }
