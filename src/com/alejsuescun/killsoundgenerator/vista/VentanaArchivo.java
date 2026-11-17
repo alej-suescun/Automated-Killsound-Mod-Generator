@@ -70,6 +70,13 @@ public class VentanaArchivo extends JDialog{
     }
     
     /**
+     * Borra todos los archivos
+     */
+    public void borrarArchivos(){
+        panelArchivosSeleccionados.borrarArchivos();
+    }
+    
+    /**
      * Crea el panel que tiene los dos botones de seleccionar por archivos y por carpeta
      * @return 
      */
