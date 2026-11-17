@@ -184,6 +184,7 @@ public class PanelArchivosSeleccionados extends JPanel{
         pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         pane.setPreferredSize(new Dimension(400, 300));
+        pane.getVerticalScrollBar().setUnitIncrement(16);
         return pane;
     }
     
