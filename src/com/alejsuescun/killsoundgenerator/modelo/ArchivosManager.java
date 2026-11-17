@@ -36,11 +36,11 @@ public class ArchivosManager {
         final String EXTENSION = ".txt";
         Path pathFinal;
         if (path.isBlank()) {
-            throw new IllegalArgumentException("La ruta proporcionada no puede estar vacia!");
+            throw new IllegalArgumentException("\tLa ruta proporcionada no puede estar vacia!");
         }
         
-        if (!isGoodStringForFile(path)) {
-            throw new IllegalArgumentException("El titulo no puede estar vacio o no cumple los requisitos!");
+        if (!isGoodStringForFile(title)) {
+            throw new IllegalArgumentException("\tEl titulo no puede estar vacio o no cumple los requisitos!");
         }
         
         pathFinal = Path.of(path, (title.concat(EXTENSION)));
@@ -51,13 +51,14 @@ public class ArchivosManager {
             
             try (BufferedWriter txtBW = new BufferedWriter(new FileWriter(archivoTXT))) {
                 txtBW.write(content);
+                System.out.println("\tSe creo el archivo \""+title+".txt\" en: \""+path+"\"");
             } catch (Exception e) {
-                System.err.println("No se pudo en escribir en: \""+pathFinal.toString()+"\", lo siguiente: \n\""
+                System.err.println("\tNo se pudo en escribir en: \""+pathFinal.toString()+"\", lo siguiente: \n\""
                         + content+"\"");
             }
         } catch (IOException e) {
             System.err.println(
-                    "No se pudo crear el documento de texto en: \""+pathFinal.toString()+"\"");
+                    "\tNo se pudo crear el documento de texto en: \""+pathFinal.toString()+"\"");
         }
     }
     

@@ -17,6 +17,14 @@ public abstract class Mod {
      */
     public static final String NOMBRE_ARCHIVO = "killsound";
     /**
+     * nombre que debe tener el archivo soundscript para juego normal
+     */
+    public static final String NOMBRE_ARCHIVO_SOUNDSCRIPT = "game_sounds_weapons";
+    /**
+     * nombre que debe tener el archivo soundscript para juego normal
+     */
+    public static final String NOMBRE_ARCHIVO_SOUNDSCRIPT_MVM = "mvm_level_sounds";
+    /**
      * nombre que debe tener la carpeta donde va el soundscript
      * de acuerdo a <a href="https://developer.valvesoftware.com/wiki/Soundscripts">Valve Developer Community</a>
      */

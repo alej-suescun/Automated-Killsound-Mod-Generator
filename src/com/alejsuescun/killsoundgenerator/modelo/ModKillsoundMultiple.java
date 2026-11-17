@@ -118,9 +118,53 @@ public class ModKillsoundMultiple extends Mod{
             ArchivosManager.copiarYpegarArchivo(killsound.getAudioFileOld().getAbsolutePath(), rutaKillsound);
             nkillsound++;
         }
+        
+        
+        crearSoundScript();
     }
     
+    private void crearSoundScript(){
+        String nombreMod = getNombreMod();
+        String rutaMod = getRutaMod();
+        String rutaBaseConcatenada = ArchivosManager.concatDosRutas(rutaMod, nombreMod);
+        String rutaScripts = ArchivosManager.concatDosRutas(rutaBaseConcatenada, NOMBRE_CARPETA_SCRIPTS);
+        String contenido = crearContenidoSoundScript(arrayKillsounds.size());
+        System.out.println("Creando archivo soundscript para casual y comunitario...");
+        ArchivosManager.crearArchivoTXT(rutaScripts, NOMBRE_ARCHIVO_SOUNDSCRIPT, contenido);
+        System.out.println("Creando archivo soundscript para mann vs machine...");
+        ArchivosManager.crearArchivoTXT(rutaScripts, NOMBRE_ARCHIVO_SOUNDSCRIPT_MVM, contenido);
+    }
     
+    private String crearContenidoSoundScript(int nKillsounds){
+        StringBuilder sb = new StringBuilder();
+        //dato curioso esta parte lleva desde el script original y simplemente se ha adaptado tanto
+        // ultimo cambio en vez de tabulaciones literales se pone el simbolo \t que es lo mismo
+        
+        // COMENTARIO
+        sb.append("// ARCHIVO GENERADO AUTOMATICAMENTE");
+        sb.append("\n// SCRIPT: https://github.com/alej-suescun/Automated-Killsound-Mod-Generator");
+        sb.append("\n// POR ASD++");
+        
+        // LO IMPORTANTE
+        sb.append("\n\"Player.KillSoundDefaultDing\"");
+        sb.append("\n{");
+        sb.append("\n\t\"channel\"\t\t\"CHAN_STATIC\"");
+        sb.append("\n\t\"volume\"\t\t\"1\"");
+        sb.append("\n\t\"soundlevel\"\t\t\"SNDLVL_NONE\"");
+        sb.append("\n\t\"pitch\"\t\t\"PITCH_NORM\"");
+        sb.append("\n\t\"rndwave\"");
+
+        sb.append("\n\t{");
+        // LOS KILLSOUNDS
+        sb.append("\n        \"wave\" \")ui/killsound.wav\"");
+        for (int i = 2; i <= nKillsounds; i++) {
+            sb.append("\n        \"wave\" \")ui/killsound").append(i).append(".wav\"");
+        }
+        sb.append("\n\t}");
+        sb.append("\n}");
+
+        return sb.toString();
+    }
     
     /**
      * Metodo para verificar si un array killsounds esta bien 
