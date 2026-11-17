@@ -60,6 +60,30 @@ public class VentanaArchivo extends JDialog{
     }
     
     /**
+     * Metodo para agregar un action listener al boton desplegable de como organizar los archivos
+     * @param l 
+     */
+    public void setBtnComboOrganizarListener(ActionListener l){
+        panelArchivosSeleccionados.setBtnComboOrganizarListener(l);
+    }
+    
+    /**
+     * Metodo para agregar un action listener al boton de seleccionar todo
+     * @param l 
+     */
+    public void setBtnSelectTodoListener(ActionListener l){
+        panelArchivosSeleccionados.setBtnSelecTodoListener(l);
+    }
+    
+    /**
+     * Metodo para agregar un action listener al boton de borrar archivos
+     * @param l 
+     */
+    public void setBtnBorrarListener(ActionListener l){
+        panelArchivosSeleccionados.setBtnBorrarArchivosListener(l);
+    }
+    
+    /**
      * Metodo para añadir un archivo al panel de archivos
      * @param nombre String con el nombre
      * @param ruta String con la ruta
