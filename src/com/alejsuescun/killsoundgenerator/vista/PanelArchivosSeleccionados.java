@@ -72,7 +72,34 @@ public class PanelArchivosSeleccionados extends JPanel{
         panelArchivos.revalidate();
         panelArchivos.repaint();
     }
-     
+    
+    /**
+     * Borra un archivo de la gui proporcionando una ruta
+     * @param ruta 
+     */
+    public void borrarArchivo(String ruta){
+        ArrayList<PanelArchivo> archivos = getArchivos();
+        
+        if (archivos == null) {
+            return;
+        }
+        
+        for (PanelArchivo archivo : archivos) {
+            if (archivo.getRuta().equals(ruta)) {
+                panelArchivos.remove(archivo);
+            }
+        }
+    }
+    
+    /**
+     * Borra todos los archivos
+     */
+    public void borrarArchivos(){
+        panelArchivos.removeAll();
+        panelArchivos.revalidate();
+        panelArchivos.repaint();
+    }
+    
     /**
      * Retorna una arrayList con todos los archivos que estan en la GUI
      * @return arraylist con los PanelArchivo, si no hay ninguno null
