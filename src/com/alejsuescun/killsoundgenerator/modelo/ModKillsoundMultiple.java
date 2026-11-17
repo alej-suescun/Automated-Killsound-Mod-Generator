@@ -4,6 +4,9 @@
  */
 package com.alejsuescun.killsoundgenerator.modelo;
 
+import static com.alejsuescun.killsoundgenerator.modelo.Mod.NOMBRE_CARPETA_SOUND;
+import static com.alejsuescun.killsoundgenerator.modelo.Mod.NOMBRE_CARPETA_SOUND_UI;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -51,7 +54,24 @@ public class ModKillsoundMultiple extends Mod{
     
     @Override
     public void crearSubCarpetas() {
-        throw new UnsupportedOperationException("Aun no programada :3");
+        if (!verificarCarpeta()) {
+            System.err.println("No se pueden crear las subcarpetas debido que aun no se ha creado la carpeta principal");
+            return;
+        }
+        
+        String[] nombreCarpetasArray = {NOMBRE_CARPETA_SOUND, NOMBRE_CARPETA_SOUND_UI};
+        String nombreMod = getNombreMod();
+        String rutaMod = getRutaMod();
+        String rutaBaseConcatenada = ArchivosManager.concatDosRutas(rutaMod, nombreMod);
+        try {
+            System.out.println("Creando subcarpetas para: "+nombreMod);
+            ArchivosManager.crearCarpetas(rutaBaseConcatenada, nombreCarpetasArray);
+            ArchivosManager.crearCarpetas(rutaBaseConcatenada, NOMBRE_CARPETA_SCRIPTS);
+        } catch (FileNotFoundException e) {
+            System.err.println("No se pudieron crear las subcarpetas para: "+nombreMod);
+            System.err.println("    La ruta: \""+rutaBaseConcatenada+"\" no es valida!");
+            System.err.println("    Por favor seleccione otra diferente!");
+        }
     }
 
     @Override
