@@ -8,6 +8,7 @@ import com.alejsuescun.killsoundgenerator.modelo.*;
 import com.alejsuescun.killsoundgenerator.vista.*;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -59,7 +60,34 @@ public class VentanaPrincipalControlador {
      * Metodo que se llama a la hora de presionar el boton de crear un mod
      */
     private void onBtnCrearMod(){
-        System.out.println("Aun no implementado :33");
+        String nombre = ventanaPrincipal.getTxtNombreMod();
+        String pathMod = ventanaPrincipal.getTxtPathMod();
+        if (!ArchivosManager.isGoodStringForFile(nombre)) {
+            JOptionPane.showMessageDialog(ventanaPrincipal, 
+                    "El nombre no puede estar vacio ni tener los siguientes caracteres: .*[/\\\\|:*?\\\"<>].*", 
+                    "No se pudo crear el mod",JOptionPane.ERROR_MESSAGE);
+            System.err.println("No se pudo crear el mod!");
+            return;
+        }
+        System.out.println("El nombre del mod es: \""+nombre+"\"");
+        
+        if (pathMod.isBlank()) {
+            JOptionPane.showMessageDialog(ventanaPrincipal, 
+                    "No se ha seleccionado ninguna carpeta!", 
+                    "No se pudo crear el mod",JOptionPane.ERROR_MESSAGE);
+            System.err.println("No se pudo crear el mod!");
+            return;
+        }
+        if (!ArchivosManager.verificarCarpetas(pathMod)) {
+            JOptionPane.showMessageDialog(ventanaPrincipal, 
+                    "La carpeta no existe o esta mal escrita!", 
+                    "No se pudo crear el mod",JOptionPane.ERROR_MESSAGE);
+            System.err.println("No se pudo crear el mod!");
+            return;
+        }
+        
+        System.out.println("El mod se guardara en: \""+pathMod+"\"");
+        
     }
 
     /**
