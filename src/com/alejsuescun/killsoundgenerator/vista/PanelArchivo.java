@@ -93,6 +93,16 @@ public class PanelArchivo extends JPanel {
     }
     
     /**
+     * Metodo para poner un status si selecionado o no al archivo
+     * @param sn
+     */
+    public void setStatus(Boolean sn){
+        btnCheckSelec.setSelected(sn);
+        btnCheckSelec.revalidate();
+        btnCheckSelec.repaint();
+    }
+    
+    /**
      * Metodo para agregar un action listener al boton de si esta seleccionado
      * @param l 
      */
