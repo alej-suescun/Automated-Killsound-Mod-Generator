@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.*;
 
 /**
@@ -41,6 +42,10 @@ public class VentanaArchivo extends JDialog{
         add(crearPanelArchivosSelecionados(), gbc);
         
         setVisible(true);
+    }
+    
+    public ArrayList<PanelArchivo> getArchivos(){
+        return panelArchivosSeleccionados.getArchivos();
     }
     
     /**
